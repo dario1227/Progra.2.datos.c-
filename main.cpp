@@ -2,18 +2,25 @@
 // Created by dario1227 on 21/04/18.
 //
 #include <iostream>
+#include <sys/stat.h>
+#include <zconf.h>
+#include <pwd.h>
 #include "Estructuras/Lista.h"
 #include "data/Cancion.h"
 #include "Estructuras/BubbleSort.h"
 #include "Estructuras/Quicksort.h"
 #include "Estructuras/RadixSort.h"
 #include "data/JsonFactory.h"
-
 using namespace std;
 void print(Lista<Cancion*>*lista){
     Nodo<Cancion*>*temp=lista->head;
     int x=1;
     while(temp!= nullptr){
+        struct passwd *pw = getpwuid(getuid());
+        const char *homedir = pw->pw_dir;
+        string name=homedir;
+        string da=name+"/Songs";
+        mkdir(da.c_str(), 0777);
         cout<<"############Cancion "<< x<<"##########"<<"\n";
         cout<<temp->value->nombre<<"\n";
         cout<<temp->value->artista<<"\n";
