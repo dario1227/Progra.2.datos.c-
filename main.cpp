@@ -7,6 +7,7 @@
 #include "Estructuras/BubbleSort.h"
 #include "Estructuras/Quicksort.h"
 #include "Estructuras/RadixSort.h"
+#include "data/JsonFactory.h"
 
 using namespace std;
 void print(Lista<Cancion*>*lista){
@@ -28,6 +29,12 @@ int main() {
     prueba->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ",""));
     prueba->add( new Cancion("Futile   ","Fear   ","Porcupine    ",""));
     prueba->add(new Cancion("Schism    ","Lateralus","Tool   ",""));
+    User* user1= new User("dario","19","dario1227","holisperras");
+    User* user2= new User("kenneth","18","kennethpapi","darksouls");
+    User* user3= new User("Roger","18","Rogerbb","h12345");
+    user1->addFriend(JsonFactory::makeUser(user2));
+    user1->addFriend(JsonFactory::makeUser(user3));
+    cout<<json_object_to_json_string(JsonFactory::makeUser(user1));
     Quicksort::start(prueba);
     print(prueba);
     RadixSort::start(prueba);
