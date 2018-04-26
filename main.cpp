@@ -27,6 +27,11 @@ int main() {
     prueba->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ",""));
     prueba->add( new Cancion("Futile   ","Fear   ","Porcupine    ",""));
     prueba->add(new Cancion("Schism    ","Lateralus","Tool   ",""));
+    Quicksort::start(prueba);
+    print(prueba);
+    RadixSort::start(prueba);
+    print(prueba);
+    BubbleSort::start(prueba);
     print(prueba);
     return 0;
 }
