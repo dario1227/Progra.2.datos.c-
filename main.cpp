@@ -11,16 +11,17 @@
 using namespace std;
 void print(Lista<Cancion*>*lista){
     Nodo<Cancion*>*temp=lista->head;
+    int x=1;
     while(temp!= nullptr){
-        cout<<"############Cancion##########"<<"\n";
+        cout<<"############Cancion "<< x<<"##########"<<"\n";
         cout<<temp->value->nombre<<"\n";
         cout<<temp->value->artista<<"\n";
         cout<<temp->value->album<<"\n";
         temp=temp->next;
+        x++;
     }
 }
 int main() {
-
     Lista<Cancion*>* prueba=new Lista<Cancion*>();
     prueba->add(new Cancion("Vicarious   ","10000Days  ","Tool     ",""));
     prueba->add(new Cancion("Master   ","Master ","Metallica    ",""));
