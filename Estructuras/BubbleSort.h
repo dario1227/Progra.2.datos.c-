@@ -6,12 +6,12 @@
 #define PROGRA_2_DATOS_C_BUBLESORT_H
 
 
-#include "../Data/Cancion.h"
+#include "../data/Cancion.h"
 #include "Lista.h"
 
 class BubbleSort {
 public:
-    static void start(Lista<Cancion> *lista);
+    static void start(Lista<Cancion*> *lista);
 
 };
 

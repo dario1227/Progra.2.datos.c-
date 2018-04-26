@@ -7,11 +7,11 @@
 
 
 #include "Lista.h"
-#include "../Data/Cancion.h"
+#include "../data/Cancion.h"
 
 class Quicksort {
 public:
-    static void start(Lista<Cancion> *Lista);
+    static void start(Lista<Cancion*> *Lista);
 
 };
 

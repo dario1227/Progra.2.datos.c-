@@ -6,12 +6,12 @@
 #define PROGRA_2_DATOS_C_RADIXSORT_H
 
 
-#include "../Data/Cancion.h"
+#include "../data/Cancion.h"
 #include "Lista.h"
 
 class RadixSort {
 public:
-    static void start(Lista<Cancion> *Lista);
+    static void start(Lista<Cancion*> *Lista);
 
 };
 

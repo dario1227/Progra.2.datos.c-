@@ -10,9 +10,11 @@ class Nodo {
 public:
     Nodo<T>(){
         this->next= nullptr;
+        this->prev= nullptr;
     };
-    T* value;
+    T value;
     Nodo* next;
+    Nodo* prev;
 
 
 };

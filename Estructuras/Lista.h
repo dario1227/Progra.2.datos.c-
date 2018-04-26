@@ -12,15 +12,19 @@ public:
     Lista(){
         this->head= nullptr;
         this->length=0;
+        this->tail= nullptr;
     };
     Nodo<T>* head;
     int length;
-    void add(T *valor){
+    Nodo<T>* tail;
+
+    void add(T valor){
         Nodo<T>* temp=this->head;
         Nodo<T>* nodo= new Nodo<T>();
         nodo->value=valor;
         if(this->head== nullptr){
             this->head=nodo;
+            this->tail=nodo;
             this->length++;
         }
         else{
@@ -29,18 +33,22 @@ public:
             }
             this->length++;
             temp->next=nodo;
+            this->tail=nodo;
+            nodo->prev=temp;
         }
     }
     void erase(T valor){
         Nodo<T>* temp=this->head;
         if(temp->value==valor){
             this->head=temp->next;
+            this->head->prev= nullptr;
             this->length--;
         }
         else {
             while (temp->next != nullptr) {
                 if(temp->next->value==valor){
                     temp->next=temp->next->next;
+                    temp->next->next->prev=temp;
                     this->length--;
                     break;
                 }
