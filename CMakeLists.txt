@@ -11,7 +11,7 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
 find_package(Qt5Xml REQUIRED)
-set(SOURCE_FILES main.cpp Estructuras/BTree.cpp Estructuras/BTree.h Estructuras/BTreeNode.cpp Estructuras/BTreeNode.h Estructuras/BubbleSort.cpp Estructuras/BubbleSort.h Estructuras/Lista.h Estructuras/Nodo.h Estructuras/Quicksort.cpp Estructuras/Quicksort.h Estructuras/RadixSort.cpp Estructuras/RadixSort.h Data/Cancion.cpp Data/Cancion.h)
+set(SOURCE_FILES main.cpp Estructuras/BTree.cpp Estructuras/BTree.h Estructuras/BTreeNode.cpp Estructuras/BTreeNode.h Estructuras/BubbleSort.cpp Estructuras/BubbleSort.h Estructuras/Lista.h Estructuras/Nodo.h Estructuras/Quicksort.cpp Estructuras/Quicksort.h Estructuras/RadixSort.cpp Estructuras/RadixSort.h data/Cancion.cpp data/Cancion.h)
 add_executable(Progra.2.datos.c- ${SOURCE_FILES} main.cpp)
 target_link_libraries(Progra.2.datos.c- json-c)
 target_link_libraries(Progra.2.datos.c- Qt5::Widgets Qt5::Core Qt5::Network Qt5::Sql

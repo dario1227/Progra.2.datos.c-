@@ -27,7 +27,6 @@ int main() {
     prueba->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ",""));
     prueba->add( new Cancion("Futile   ","Fear   ","Porcupine    ",""));
     prueba->add(new Cancion("Schism    ","Lateralus","Tool   ",""));
-     RadixSort::start(prueba);
     print(prueba);
     return 0;
 }
