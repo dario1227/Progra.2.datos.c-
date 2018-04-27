@@ -48,5 +48,6 @@ int main() {
     print(prueba);
     BubbleSort::start(prueba);
     print(prueba);
+    cout<<User::UserHash->Search(user2->num)->password;
     return 0;
 }

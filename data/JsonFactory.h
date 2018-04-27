@@ -8,7 +8,6 @@
 
 #include "Cancion.h"
 #include "User.h"
-#include "rapidxml/rapidxml.hpp"
 #include <json-c/json.h>
 class JsonFactory {
 public:

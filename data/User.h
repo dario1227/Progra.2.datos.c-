@@ -8,26 +8,18 @@
 #include <iostream>
 #include "../Estructuras/Lista.h"
 #include "json-c/json_object.h"
+#include "../Estructuras/HashMap.h"
 using  namespace std;
+class HashMap;
 class User {
 public:
+    User(string name, string age, string ID, string password);
+    User();
     void addFriend(json_object* compa);
-    User(string name, string age, string ID, string password){
-        this->compas=json_object_new_array();
-        this->password=password;
-        this->name=name;
-        this->ID=ID;
-        this->age=age;
-    }
-    User(){
-        this->age= "";
-        this->ID= "";
-        this->name= "";
-        this->password= "";
-        this->compas=json_object_new_array();
-    }
+    static HashMap* UserHash;
     string ID;
     string password;
+    int num;
     string name;
     string age;
     string favorites[10];
