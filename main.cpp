@@ -11,8 +11,11 @@
 #include "Estructuras/Quicksort.h"
 #include "Estructuras/RadixSort.h"
 #include "data/JsonFactory.h"
+#include <rapidxml/rapidxml.hpp>
 using namespace std;
 void print(Lista<Cancion*>*lista){
+    rapidxml::xml_document<> xmldoc;
+    rapidxml::xml_document<> xmlseg;
     Nodo<Cancion*>*temp=lista->head;
     int x=1;
     while(temp!= nullptr){
@@ -30,6 +33,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main() {
+
     Lista<Cancion*>* prueba=new Lista<Cancion*>();
     prueba->add(new Cancion("Vicarious   ","10000Days  ","Tool     ",""));
     prueba->add(new Cancion("Master   ","Master ","Metallica    ",""));
