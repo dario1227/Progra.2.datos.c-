@@ -4,7 +4,7 @@
 
 #ifndef PROGRA_2_DATOS_C_LISTA_H
 #define PROGRA_2_DATOS_C_LISTA_H
-
+//
 #include "Nodo.h"
 template <typename T>
 class Lista {
