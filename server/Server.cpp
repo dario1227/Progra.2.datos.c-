@@ -1,9 +1,16 @@
 //
 // Created by kenneth on 4/27/18.
 //
+#ifdef __APPLE__
 
+#include "/usr/include/sys/signal.h"
 
+#endif
+
+#ifdef __LINUX__
 #include <bits/signum.h>
+#endif
+
 #include <signal.h>
 #include <netinet/in.h>
 #include <cstring>
@@ -11,8 +18,6 @@
 #include "exception"
 #include <iostream>
 #include "Server.h"
-#include <bits/signum.h>
-#include <signal.h>
 void Server::initialize_connection() {
     int client;
     int server;

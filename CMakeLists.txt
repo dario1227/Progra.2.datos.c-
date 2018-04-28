@@ -1,7 +1,13 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.10)
 project(Progra.2.datos.c-)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_PREFIX_PATH "/opt/qt/5.6/gcc_64/")
+
+#set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_PREFIX_PATH "/Applications/Qt/5.10.1/clang_64")
+#set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 find_package(Qt5Core REQUIRED)
@@ -11,7 +17,7 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
 find_package(Qt5Xml REQUIRED)
-set(SOURCE_FILES main.cpp Estructuras/BTree.cpp Estructuras/BTree.h Estructuras/BTreeNode.cpp Estructuras/BTreeNode.h Estructuras/BubbleSort.cpp Estructuras/BubbleSort.h Estructuras/Lista.h Estructuras/Nodo.h Estructuras/Quicksort.cpp Estructuras/Quicksort.h Estructuras/RadixSort.cpp Estructuras/RadixSort.h data/Cancion.cpp data/Cancion.h data/User.cpp data/User.h data/JsonFactory.cpp data/JsonFactory.h Estructuras/HashEntry.cpp Estructuras/HashEntry.h Estructuras/HashMap.cpp Estructuras/HashMap.h server/Server.cpp server/Server.h Estructuras/Binary_search_tree.cpp Estructuras/Binary_search_tree.h Estructuras/Node.cpp Estructuras/Node.h data/Data_parser.cpp data/Data_parser.h data/Data_Holder.cpp data/Data_Holder.h)
+set(SOURCE_FILES main.cpp Estructuras/BTree.cpp Estructuras/BTree.h Estructuras/BTreeNode.cpp Estructuras/BTreeNode.h Estructuras/BubbleSort.cpp Estructuras/BubbleSort.h Estructuras/Lista.h Estructuras/Nodo.h Estructuras/Quicksort.cpp Estructuras/Quicksort.h Estructuras/RadixSort.cpp Estructuras/RadixSort.h data/Cancion.cpp data/Cancion.h data/User.cpp data/User.h data/JsonFactory.cpp data/JsonFactory.h Estructuras/HashEntry.cpp Estructuras/HashEntry.h Estructuras/HashMap.cpp Estructuras/HashMap.h server/Server.cpp server/Server.h Estructuras/Binary_search_tree.cpp Estructuras/Binary_search_tree.h Estructuras/Node.cpp Estructuras/Node.h data/Data_parser.cpp data/Data_parser.h data/Data_Holder.cpp data/Data_Holder.h XML/rapidxml.hpp XML/rapidxml_iterators.hpp XML/rapidxml_print.hpp XML/rapidxml_utils.hpp)
 add_executable(Progra.2.datos.c- ${SOURCE_FILES} main.cpp)
 target_link_libraries(Progra.2.datos.c- json-c)
 target_link_libraries(Progra.2.datos.c- Qt5::Widgets Qt5::Core Qt5::Network Qt5::Sql

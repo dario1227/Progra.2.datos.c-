@@ -11,7 +11,7 @@
 #include "Estructuras/Quicksort.h"
 #include "Estructuras/RadixSort.h"
 #include "data/JsonFactory.h"
-#include <rapidxml/rapidxml.hpp>
+#include <XML/rapidxml.hpp>
 using namespace std;
 void print(Lista<Cancion*>*lista){
     rapidxml::xml_document<> xmldoc;

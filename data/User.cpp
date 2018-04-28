@@ -3,7 +3,8 @@
 //
 
 #include "User.h"
-static int count=0;
+
+static int counter = 0;
 HashMap *User::UserHash=new HashMap();
 void User::addFriend(json_object *compa) {
     json_object_array_add(this->compas,compa);
@@ -14,9 +15,9 @@ this->password=password;
 this->name=name;
 this->ID=ID;
 this->age=age;
-this->num=count;
-UserHash->Insert(count,this);
-count++;
+    this->num = counter;
+    UserHash->Insert(counter, this);
+    counter++;
 
 }
 User::User(){
@@ -25,7 +26,7 @@ User::User(){
     this->name= "";
     this->password= "";
     this->compas=json_object_new_array();
-    this->num=count;
-    UserHash->Insert(count,this);
-    count++;
+    this->num = counter;
+    UserHash->Insert(counter, this);
+    counter++;
 }
