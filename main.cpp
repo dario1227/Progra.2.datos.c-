@@ -11,11 +11,11 @@
 #include "Estructuras/Quicksort.h"
 #include "Estructuras/RadixSort.h"
 #include "data/JsonFactory.h"
-#include "server/Server.h"
-#include <fstream>
-
+#include <rapidxml/rapidxml.hpp>
 using namespace std;
-void prin2(Lista<Cancion*>*lista){
+void print(Lista<Cancion*>*lista){
+    rapidxml::xml_document<> xmldoc;
+    rapidxml::xml_document<> xmlseg;
     Nodo<Cancion*>*temp=lista->head;
     int x=1;
     while(temp!= nullptr){
@@ -32,7 +32,6 @@ void prin2(Lista<Cancion*>*lista){
         x++;
     }
 }
-
 int main() {
 
     Lista<Cancion*>* prueba=new Lista<Cancion*>();
@@ -48,12 +47,11 @@ int main() {
     user1->addFriend(JsonFactory::makeUser(user3));
     cout<<json_object_to_json_string(JsonFactory::makeUser(user1));
     Quicksort::start(prueba);
-    prin2(prueba);
+    print(prueba);
     RadixSort::start(prueba);
-    prin2(prueba);
+    print(prueba);
     BubbleSort::start(prueba);
-    prin2(prueba);
+    print(prueba);
     cout<<User::UserHash->Search(user2->num)->password;
-    Server::initialize_connection();
     return 0;
 }
