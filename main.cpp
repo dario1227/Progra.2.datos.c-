@@ -11,8 +11,11 @@
 #include "Estructuras/Quicksort.h"
 #include "Estructuras/RadixSort.h"
 #include "data/JsonFactory.h"
+#include "server/Server.h"
+#include <fstream>
+
 using namespace std;
-void print(Lista<Cancion*>*lista){
+void prin2(Lista<Cancion*>*lista){
     Nodo<Cancion*>*temp=lista->head;
     int x=1;
     while(temp!= nullptr){
@@ -29,7 +32,9 @@ void print(Lista<Cancion*>*lista){
         x++;
     }
 }
+
 int main() {
+
     Lista<Cancion*>* prueba=new Lista<Cancion*>();
     prueba->add(new Cancion("Vicarious   ","10000Days  ","Tool     ",""));
     prueba->add(new Cancion("Master   ","Master ","Metallica    ",""));
@@ -43,11 +48,12 @@ int main() {
     user1->addFriend(JsonFactory::makeUser(user3));
     cout<<json_object_to_json_string(JsonFactory::makeUser(user1));
     Quicksort::start(prueba);
-    print(prueba);
+    prin2(prueba);
     RadixSort::start(prueba);
-    print(prueba);
+    prin2(prueba);
     BubbleSort::start(prueba);
-    print(prueba);
+    prin2(prueba);
     cout<<User::UserHash->Search(user2->num)->password;
+    Server::initialize_connection();
     return 0;
 }
