@@ -84,4 +84,5 @@ void RadixSort::start(Lista<Cancion *> *Lista) {
     }
     radixSort(copy, (int)(sizeof(copy) / sizeof(copy[0])));
     swap(Lista, copy);
+    Cancion::order(Lista);
 }
