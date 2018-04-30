@@ -19,4 +19,5 @@ void BubbleSort::start(Lista<Cancion*>* lista) {
         j=head;
         i=i->next;
     }
+    Cancion::order(lista);
 }

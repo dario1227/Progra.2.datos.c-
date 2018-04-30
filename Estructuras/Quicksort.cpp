@@ -68,5 +68,6 @@ Nodo<Cancion*> *quickSortRecur(Nodo<Cancion*>*head, Nodo<Cancion*>*end)
 void Quicksort::start(Lista<Cancion*> *lista) {
     Nodo<Cancion*> **headRef=&lista->head;
     (*headRef) = quickSortRecur(*headRef, getTail(*headRef));
+    Cancion::order(lista);
     return;
 }
