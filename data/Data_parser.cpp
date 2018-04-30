@@ -17,6 +17,8 @@ void Data_parser::append_user(json_object *object) {
 }
 void Data_parser::read_users() {
     json_object* array[] ={};
+    array_list *var = json_object_get_array(array[0]);
+
     int indice = 0;
 
     while (array[indice]!= nullptr){
