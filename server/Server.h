@@ -8,6 +8,7 @@
 
 class Server {
 public:
+    //
 static void initialize_connection();
 };
 
