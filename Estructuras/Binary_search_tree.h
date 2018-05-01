@@ -15,6 +15,8 @@ User* search(string name);
 
 
     void insertar(string str, User* usuario);
+
+    User *search2(string name);
 };
 
 

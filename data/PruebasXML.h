@@ -9,6 +9,7 @@
 class PruebasXML {
 public:
     static void prueba();
+    static void prueba2();
 };
 
 

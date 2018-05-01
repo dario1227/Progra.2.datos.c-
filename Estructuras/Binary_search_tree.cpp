@@ -18,6 +18,7 @@ User* Binary_search_tree::search(string name) {
     }
     return nullptr;
 }
+
 void Binary_search_tree::insertar(string numero, User *usuario) {
     Node* newNode = new Node(usuario);
     if(root== nullptr){

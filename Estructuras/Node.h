@@ -16,9 +16,9 @@ public:
     Node* left= nullptr;
     Node* right= nullptr;
 
-    Node(User* usuario){
+    Node(User* usuario2){
         data=usuario->name;
-        usuario=usuario;
+        usuario=usuario2;
         left= nullptr;
         right=nullptr;
     }
