@@ -16,6 +16,8 @@
 #include "data/PruebasXML.h"
 #include "server/XML_handler.h"
 #include "data/XML_generator.h"
+#include "Estructuras/ArbolB.h"
+#include "Estructuras/BinarySearch.h"
 
 using namespace std;
 void print(Lista<Cancion*>*lista){
@@ -36,9 +38,9 @@ void print(Lista<Cancion*>*lista){
 int main(int argc, char **argv) {
    // PruebasXML::prueba2();
     Lista<Cancion*>* canciones = new Lista<Cancion*>();
-    canciones->add( new Cancion("Vicarious   ","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
-    canciones->add(new Cancion("Master   ","Master ","Metallica    ","DALE LA MADRE QUE TE TRAKP"));
-    canciones->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","1000 anos sin ti"));
+    canciones->add( new Cancion("Vicarious","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
+    canciones->add(new Cancion("Master","Master ","Megadeth","DALE LA MADRE QUE TE TRAKP"));
+    canciones->add(new Cancion("Hangar 18","Rest in peace","Tool","1000 anos sin ti"));
     XML_generator::create_Music_list(canciones);
 //    QApplication app(argc, argv);
 //    new Cancion("Vicarious   ","10000Days  ","Tool     "," que ella amor");
@@ -60,5 +62,8 @@ int main(int argc, char **argv) {
 //    print(Cancion::Music);
 //    string dta="dale duro que ella quiere amor";
 //    cout<<BackTracking::start(Cancion::Music,dta)->nombre;
+    cout<<Cancion::arbolb->Buscar_Nodo("Vicarious")->length;
+    cout<<Cancion::avl->Buscar("Megadeth")->length;
+    cout<<BinarySearch::start("Rest in peace")->album;
     return 0;
 }

@@ -8,8 +8,12 @@
 #include <iostream>
 #include <QtCore/QString>
 #include "../Estructuras/Lista.h"
+#include "../Estructuras/ArbolB.h"
+#include "../Estructuras/AVL.h"
 
 using namespace std;
+class ArbolB;
+class AVL;
 class Cancion {
 public:
     Cancion();
@@ -21,6 +25,8 @@ public:
     QString *letra;
     int calificacion;
     static Lista<Cancion*>*Music;
+    static ArbolB* arbolb;
+    static AVL* avl;
     static void order(Lista<Cancion*>*music);
 
 };

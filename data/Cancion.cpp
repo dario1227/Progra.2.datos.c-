@@ -5,6 +5,8 @@
 #include "Cancion.h"
 static int num=0;
 Lista<Cancion*>*Cancion::Music=new Lista<Cancion*>();
+ArbolB* Cancion::arbolb=new ArbolB();
+AVL* Cancion::avl=new AVL();
 void Cancion::order(Lista<Cancion *> *music) {
     Nodo<Cancion*>*temp=music->head;
     int c=0;
@@ -22,8 +24,10 @@ Cancion::Cancion() {
     this->letra= nullptr;
     this->pos=num;
     this->calificacion=0;
-    num++;
     Cancion::Music->add(this);
+    Cancion::arbolb->Insertar_Nodo(num);
+    Cancion::avl->Insertar(num);
+    num++;
 }
 Cancion::Cancion(string nombre, string album, string artista, string letra) {
     this->nombre= nombre;
@@ -32,6 +36,8 @@ Cancion::Cancion(string nombre, string album, string artista, string letra) {
     this->artista= artista;
     this->letra= new QString(letra.c_str());
     this->calificacion=0;
+    Cancion::arbolb->Insertar_Nodo(num);
+    Cancion::avl->Insertar(num);
     num++;
     Cancion::Music->add(this);
 
