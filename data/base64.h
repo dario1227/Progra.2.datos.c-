@@ -6,7 +6,7 @@
 #define PROGRA_2_DATOS_C_BASE64_H
 
 #include <string>
-
+//
 class base64 {
 public:
     static std::string base64_decode(std::string const& s);
