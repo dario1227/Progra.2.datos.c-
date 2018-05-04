@@ -34,12 +34,13 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-   // PruebasXML::prueba2();
-    Lista<Cancion*>* canciones = new Lista<Cancion*>();
-    canciones->add( new Cancion("Vicarious   ","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
-    canciones->add(new Cancion("Master   ","Master ","Metallica    ","DALE LA MADRE QUE TE TRAKP"));
-    canciones->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","1000 anos sin ti"));
-    XML_generator::create_Music_list(canciones);
+    PruebasXML::divide_audio();
+//    PruebasXML::prueba2();
+//    Lista<Cancion*>* canciones = new Lista<Cancion*>();
+//    canciones->add( new Cancion("Vicarious   ","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
+//    canciones->add(new Cancion("Master   ","Master ","Metallica    ","DALE LA MADRE QUE TE TRAKP"));
+//    canciones->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","1000 anos sin ti"));
+//    XML_generator::create_Music_list(canciones);
 //    QApplication app(argc, argv);
 //    new Cancion("Vicarious   ","10000Days  ","Tool     "," que ella amor");
 //    new Cancion("Master   ","Master ","Metallica    ","amor");
