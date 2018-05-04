@@ -37,6 +37,15 @@ public:
             nodo->prev=temp;
         }
     }
+    T get(int pos){
+        Nodo<T>*temp=this->head;
+        int c=0;
+        while(c!=pos){
+            temp=temp->next;
+            c++;
+        }
+        return temp->value;
+    }
     void erase(T valor){
         Nodo<T>* temp=this->head;
         if(temp->value==valor){
