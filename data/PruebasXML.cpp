@@ -10,6 +10,7 @@
 #include "rapidxml.hpp"
 #include "rapidxml_print.hpp"
 #include "base64.h"
+#include "../server/Archive_manager.h"
 
 void PruebasXML::prueba() {
     using namespace rapidxml;
@@ -81,50 +82,35 @@ void PruebasXML::prueba2() {
     }
 }
 void PruebasXML::divide_audio() {
-
+//
     FILE * iFile, * oFile;
     long lSize;
-    char * buffer;
-    size_t result;
-
-    iFile = fopen ( "/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3" , "rb" );
-    if (iFile==NULL) {fputs ("File error",stderr); }
-
-    oFile = fopen ( "LOLA.mp3" , "wb" );
+//    char * buffer;
+//    size_t result;
+//
+iFile = fopen ( "/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3" , "rb" );
+  if (iFile==NULL) {fputs ("File error",stderr); }
+//
+   oFile = fopen ( "LOLA.xml" , "wb" );
     if (oFile==NULL) {fputs ("File error",stderr); }
-
-
-    fseek (iFile , 0 , SEEK_END);
-    lSize = ftell (iFile)/20;
-    rewind (iFile);
-
-
-    buffer = (char*) malloc (sizeof(char)*lSize);
-    if (buffer == NULL) {fputs ("Memory error",stderr); }
-
-
-    result = fread (buffer,1,lSize,iFile);
+//
+//
+//    fseek (iFile , 0 , SEEK_END);
+    lSize = ftell (iFile);
+//    rewind (iFile);
+//
+//
+//    buffer = (char*) malloc (sizeof(char)*lSize);
+//    if (buffer == NULL) {fputs ("Memory error",stderr); }
+//
+//
+//    result = fread (buffer,1,lSize,iFile);
 
  //   printf("%d\n",result);
 //___________________#####################################PRUBAXML&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-    xml_document<> doc;
-    xml_node<>* decl = doc.allocate_node(node_declaration);
-    decl->append_attribute(doc.allocate_attribute("version", "1.0"));
-    decl->append_attribute(doc.allocate_attribute("encoding", "utf-8"));
-    doc.append_node(decl);
 
-// root node
-    xml_node<>* root = doc.allocate_node(node_element, "rootnode");
-    char* archivo = doc.allocate_string(base64::base64_encode(reinterpret_cast<const unsigned char *>(buffer), lSize).c_str());
-    root->append_attribute(doc.allocate_attribute("version", archivo));
-    root->append_attribute(doc.allocate_attribute("type", "example"));
-    doc.append_node(root);
-    std::stringstream ss;
-    ss <<doc;
-    std::string result_xml = ss.str();
-    std::cout <<result_xml<<std::endl;
-
+//
 
 
 
@@ -132,9 +118,31 @@ void PruebasXML::divide_audio() {
     //PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 //std::string str = base64::base64_decode();
 //std::cout<<str<<std::endl;
-    fwrite(base64::base64_decode(root->first_attribute("version")->value()).c_str(),lSize,1,oFile);
+    string a;
+    a = Archive_manager::return_archive("/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3", 0);
+    xml_document<> doc;
+    xml_node<>* decl = doc.allocate_node(node_declaration);
+    decl->append_attribute(doc.allocate_attribute("version", "1.0"));
+    decl->append_attribute(doc.allocate_attribute("encoding", "utf-8"));
+    doc.append_node(decl);
+//
+//// root node
+    xml_node<>* root = doc.allocate_node(node_element, "rootnode");
+    char* archivo = doc.allocate_string(a.c_str());
+    root->append_attribute(doc.allocate_attribute("version", "LOL"));
+    root->append_attribute(doc.allocate_attribute("type", "example"));
+    xml_node<>* root2 = doc.allocate_node(node_element,"meme");
+    root2->append_attribute(doc.allocate_attribute("MEME",archivo));
 
+    root->append_node(root2);
+    doc.append_node(root);
+    std::stringstream ss;
+    ss <<doc;
+    std::string result_xml = ss.str();
+    std::cout <<result_xml<<std::endl;
+   fwrite(ss.str().c_str(), ss.str().size(),1,oFile);
+  // std::cout<<c<<std::endl;
     fclose (iFile);
-    free (buffer);
-    printf("%d",lSize);
+  //  free (buffer);
+  //  printf("%d",lSize);
 }

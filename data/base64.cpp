@@ -89,6 +89,6 @@ std::string base64::base64_decode(std::string const& encoded_string) {
 
         for (j = 0; (j < i - 1); j++) ret += char_array_3[j];
     }
-    std::cout<<ret<<std::endl;
+  //  std::cout<<ret<<std::endl;
     return ret;
 }

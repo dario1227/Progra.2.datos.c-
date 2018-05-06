@@ -35,6 +35,8 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
+    PruebasXML::prueba2();
+    PruebasXML::divide_audio();
 //    PruebasXML::divide_audio();
 //    PruebasXML::prueba2();
 //    Lista<Cancion*>* canciones = new Lista<Cancion*>();
@@ -62,6 +64,6 @@ int main(int argc, char **argv) {
 //    print(Cancion::Music);
 //    string dta="dale duro que ella quiere amor";
 //    cout<<BackTracking::start(Cancion::Music,dta)->nombre;
-    OdysseyServer::start();
+//    OdysseyServer::start();
     return 0;
 }

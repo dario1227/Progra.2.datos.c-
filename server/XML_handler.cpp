@@ -10,6 +10,7 @@
 #include "../data/XML_generator.h"
 #include "../data/rapidxml_print.hpp"
 #include "../data/Data_Holder.h"
+#include "Archive_manager.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -67,10 +68,13 @@ void XML_handler::parse_xml_request_log(char *archive) {
     char* password = user->first_attribute("Password")->value();
     User *usuario = Data_Holder::users->search(name);
     if(usuario->password==password){
+        root_node->append_attribute(doc.allocate_attribute("Result","true"));
 
         return;
     }
     else{
+        root_node->append_attribute(doc.allocate_attribute("Result","false"));
+
         return;
     }
 }
@@ -107,5 +111,24 @@ void XML_handler::primary_handler(char *archivo) {
         parse_song_requests(archivo);
         return;
     }
+    if(operacion=="Stream"){
+        parse_chunk(archivo);
+        return;
+    }
+
     return;
+}
+void XML_handler::parse_chunk(char *archivo) {
+    xml_document<> doc;
+    doc.parse<0>(archivo);
+    xml_node<> *root_node = doc.first_node("Root");
+    char* num = root_node->first_attribute("Chunk")->value();
+    string str = string(num);
+    int chunk = stoi(num);
+    char* name = root_node->first_attribute("Filename")->value();
+    char* archive = doc.allocate_string(Archive_manager::return_archive(name,chunk));
+    xml_node<>* child = doc.allocate_node(node_element, "Archive");
+    child->append_attribute(doc.allocate_attribute("Data",archive));
+    root_node->append_node(child);
+
 }
