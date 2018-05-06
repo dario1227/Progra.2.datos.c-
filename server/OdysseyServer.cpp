@@ -45,13 +45,11 @@ void OdysseyServer::start() {
     do {
 
         mysock = accept(sock, (struct sockaddr *) 0, 0);
-
         if (mysock == -1) {
 
             perror("ACCEPT FAILED");
         } else {
             memset(buff, 0, sizeof(buff));
-
             if ((rval = recv(mysock, buff, sizeof(buff), 0)) < 0)
                 perror("READING STREAM MESSAGE ERROR");
             else if (rval == 0)
