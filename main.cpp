@@ -16,6 +16,7 @@
 #include "data/PruebasXML.h"
 #include "server/XML_handler.h"
 #include "data/XML_generator.h"
+#include "server/OdysseyServer.h"
 
 using namespace std;
 void print(Lista<Cancion*>*lista){
@@ -34,7 +35,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    PruebasXML::divide_audio();
+//    PruebasXML::divide_audio();
 //    PruebasXML::prueba2();
 //    Lista<Cancion*>* canciones = new Lista<Cancion*>();
 //    canciones->add( new Cancion("Vicarious   ","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
@@ -61,5 +62,6 @@ int main(int argc, char **argv) {
 //    print(Cancion::Music);
 //    string dta="dale duro que ella quiere amor";
 //    cout<<BackTracking::start(Cancion::Music,dta)->nombre;
+    OdysseyServer::start();
     return 0;
 }
