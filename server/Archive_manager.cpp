@@ -27,7 +27,7 @@ char* Archive_manager::return_archive(char *filename, int chunk) {
     lSize = ftell (iFile);
     rewind (iFile);
 
-
+//
     buffer = (char*) malloc (sizeof(char)*lSize);
     if (buffer == NULL) {fputs ("Memory error",stderr); }
     long chunksize = lSize*0.02;
