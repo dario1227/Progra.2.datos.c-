@@ -25,7 +25,6 @@ void AVL::Insertar(const int dat)
 {
     NodoAVL *padre = NULL;
 
-    cout << "Insertar: " << dat << endl;
     actual = raiz;
     // Buscar el dato en el árbol, manteniendo un puntero al nodo padre
     while(!Vacio(actual) && dat != actual->dato) {

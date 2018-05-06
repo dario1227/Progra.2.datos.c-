@@ -24,6 +24,7 @@ public:
     string age;
     string favorites[10];
     json_object*compas;
+    static Lista<User*>*Users;
 
 };
 

@@ -13,6 +13,8 @@ class JsonFactory {
 public:
     static json_object* makeSong(Cancion * song);
     static json_object* makeUser(User* usuario);
+    static void save();
+    static void read();
 
 };
 
