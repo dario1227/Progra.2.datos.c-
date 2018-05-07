@@ -5,10 +5,14 @@
 #ifndef PROGRA_2_DATOS_C_ODYSSEYSERVER_H
 #define PROGRA_2_DATOS_C_ODYSSEYSERVER_H
 
+#include <iostream>
 
+using namespace std;
 class OdysseyServer {
 public:
-static void start();
+    int mysock;
+ void start();
+ void send2(string to_send);
 };
 
 

@@ -20,7 +20,6 @@
 #include "Server.h"
 void Server::initialize_connection() {
     int client;
-    int server;
     int portNum = 1500;
     bool isExit = false;
     int bufsize = 1024;

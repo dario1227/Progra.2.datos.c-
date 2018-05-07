@@ -59,7 +59,7 @@ void saveaux(string data){
             json_object_array_add(array,JsonFactory::makeSong(temp->value));
             temp=temp->next;
         }
-        json_object_to_file_ext(da.c_str(), array, 0777);
+        json_object_to_file_ext((char*)da.c_str(), array, 0777);
 
     }
     else{
@@ -70,7 +70,7 @@ void saveaux(string data){
 
             temp=temp->next;
         }
-        json_object_to_file_ext(da.c_str(), array, 0777);
+        json_object_to_file_ext((char*)da.c_str(), array, 0777);
 
     }
 

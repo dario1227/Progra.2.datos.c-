@@ -8,8 +8,8 @@
 
 class Server {
 public:
-    //
-static void initialize_connection();
+    int server;
+ void initialize_connection();
 };
 
 

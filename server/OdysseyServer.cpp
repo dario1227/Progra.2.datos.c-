@@ -7,13 +7,17 @@
 #include <iostream>
 #include <netinet/in.h>
 #include <cstring>
+#include "Server.h"
 
+#include <json-c/json_tokener.h>
+#include <bits/signum.h>
+#include <signal.h>
 using namespace std;
 void OdysseyServer::start() {
     /* SOCKET VARIABLES */
     int sock;
     struct sockaddr_in server;
-    int mysock;
+     mysock;
     char buff[1024];
     int rval;
 
@@ -58,8 +62,14 @@ void OdysseyServer::start() {
                 printf("MSG: %s\n", buff);
 
             printf("GOT THE MESSAGE (rval = %d)\n", rval);
+            string to_send = "MEME meme MEME";
+            send(mysock,to_send.c_str(), to_send.length(),0);
 
         }
 
     } while (1);
+}
+void OdysseyServer::send2(string to_send) {
+
+    send(mysock,to_send.c_str(), to_send.length(),0);
 }
