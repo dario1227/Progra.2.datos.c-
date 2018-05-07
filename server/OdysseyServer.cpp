@@ -12,6 +12,8 @@
 #include <json-c/json_tokener.h>
 #include <bits/signum.h>
 #include <signal.h>
+#include <zconf.h>
+
 using namespace std;
 void OdysseyServer::start() {
     /* SOCKET VARIABLES */
@@ -32,7 +34,7 @@ void OdysseyServer::start() {
 
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(5700);
+    server.sin_port = htons(5400);
 
     /*CALL BIND*/
     if (bind(sock, (struct sockaddr *) &server, sizeof(server))) {
@@ -62,8 +64,8 @@ void OdysseyServer::start() {
                 printf("MSG: %s\n", buff);
 
             printf("GOT THE MESSAGE (rval = %d)\n", rval);
-            string to_send = "MEME meme MEME";
-            send(mysock,to_send.c_str(), to_send.length(),0);
+            string sendd="HOLAAAA";
+                send(mysock,sendd.c_str(), sendd.length(), 0);
 
 
         }
