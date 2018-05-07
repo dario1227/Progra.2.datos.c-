@@ -32,7 +32,7 @@ void OdysseyServer::start() {
 
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(5000);
+    server.sin_port = htons(5700);
 
     /*CALL BIND*/
     if (bind(sock, (struct sockaddr *) &server, sizeof(server))) {
@@ -64,6 +64,7 @@ void OdysseyServer::start() {
             printf("GOT THE MESSAGE (rval = %d)\n", rval);
             string to_send = "MEME meme MEME";
             send(mysock,to_send.c_str(), to_send.length(),0);
+
 
         }
 
