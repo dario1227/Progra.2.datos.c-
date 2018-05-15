@@ -35,7 +35,7 @@ char* Archive_manager::return_archive(char *filename, int chunk) {
     result = fread (buffer,1,lSize,iFile);
  char* pedazo = Archive_manager::divide_chunk(buffer,chunksize,chunksize*chunk,chunksize*chunk+chunksize);
  std::string* parseado = new std::string(base64::base64_encode(reinterpret_cast<const unsigned char *>(pedazo), chunksize).c_str());
- std::cout<<"ME DIOO ESTO"<<parseado<<std::endl;
+ //std::cout<<"ME DIOO ESTO"<<parseado<<std::endl;
     return const_cast<char *>(parseado->c_str());
 }
 char* Archive_manager::divide_chunk(char *archive, long chunksize, long limit1, long limit2) {

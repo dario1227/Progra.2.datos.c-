@@ -91,7 +91,7 @@ void PruebasXML::divide_audio() {
 iFile = fopen ( "/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3" , "rb" );
   if (iFile==NULL) {fputs ("File error",stderr); }
 //
-   oFile = fopen ( "LOLA.xml" , "wb" );
+   oFile = fopen ( "LOLA.mp3" , "wb" );
     if (oFile==NULL) {fputs ("File error",stderr); }
 //
 //

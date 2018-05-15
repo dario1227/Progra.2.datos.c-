@@ -15,6 +15,8 @@ public:
     static void parse_new_user(char* archive);
     static void primary_handler(char* archivo);
     static void parse_chunk(char* archivo);
+
+    static void parse_new_file(char *archivo);
 };
 
 

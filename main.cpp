@@ -40,7 +40,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    carpeta();
+   // carpeta();
 //    PruebasXML::divide_audio();
 //    PruebasXML::prueba2();
 //    Lista<Cancion*>* canciones = new Lista<Cancion*>();
@@ -70,8 +70,10 @@ int main(int argc, char **argv) {
 //    cout<<BackTracking::start(Cancion::Music,dta)->nombre;
    // OdysseyServer::start();
       //      JsonFactory::save();
-Server_Holder::start();
-    cout<<Cancion::Music->head->next->value->nombre;
-    cout<<User::Users->head->next->next->value->password;
+  //  PruebasXML::divide_audio();
+    OdysseyServer* server = new OdysseyServer();
+    server->start();
+//    cout<<Cancion::Music->head->next->value->nombre;
+//    cout<<User::Users->head->next->next->value->password;
     return 0;
 }

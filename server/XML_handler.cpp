@@ -11,6 +11,7 @@
 #include "../data/rapidxml_print.hpp"
 #include "../data/Data_Holder.h"
 #include "Archive_manager.h"
+#include "../data/base64.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -99,6 +100,10 @@ void XML_handler::primary_handler(char *archivo) {
     doc.parse<0>(archivo);
     xml_node<> *root_node = doc.first_node("Root");
     char* operacion = root_node->first_attribute("Operation")->value();
+    if(operacion=="Upload"){
+        parse_new_file(archivo);
+        return;
+    }
     if(operacion=="Register"){
         parse_new_user(archivo);
         return;
@@ -130,5 +135,20 @@ void XML_handler::parse_chunk(char *archivo) {
     xml_node<>* child = doc.allocate_node(node_element, "Archive");
     child->append_attribute(doc.allocate_attribute("Data",archive));
     root_node->append_node(child);
+
+}
+
+void XML_handler::parse_new_file(char *archivo) {
+std::cout<<"llego"<<archivo<<std::endl;
+    xml_document<> doc;
+    doc.parse<0>(archivo);
+    xml_node<> *root_node = doc.first_node("Root");
+    xml_node<>* nodo = root_node->first_node("Archive");
+    char* archive = nodo->first_attribute("File")->value();
+    string str = base64::base64_decode(archive);
+    FILE* oFile;
+    std::cout<<str<<std::endl;
+    oFile = fopen ( "SALVADO.mp3" , "wb" );
+    fwrite(str.c_str(), str.size(),1,oFile);
 
 }

@@ -10,9 +10,12 @@
 using namespace std;
 class OdysseyServer {
 public:
+    char buffer[10000000];
     int mysock;
  void start();
+ bool isXML(char* files);
  void send2(string to_send);
+ void receiveFile();
 };
 
 

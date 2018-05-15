@@ -51,7 +51,7 @@ std::string base64::base64_encode(unsigned char const* bytes_to_encode, unsigned
             ret += '=';
 
     }
-    std::cout<<ret<<std::endl;
+  //  std::cout<<ret<<std::endl;
     return ret;
 
 }

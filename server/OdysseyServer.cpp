@@ -8,11 +8,16 @@
 #include <netinet/in.h>
 #include <cstring>
 #include "Server.h"
+#include "Archive_manager.h"
+#include "XML_handler.h"
 
 #include <json-c/json_tokener.h>
 #include <bits/signum.h>
 #include <signal.h>
 #include <zconf.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sstream>
 
 using namespace std;
 void OdysseyServer::start() {
@@ -20,7 +25,7 @@ void OdysseyServer::start() {
     int sock;
     struct sockaddr_in server;
      mysock;
-    char buff[1024];
+    char buff[7000000];
     int rval;
 
 
@@ -55,19 +60,23 @@ void OdysseyServer::start() {
 
             perror("ACCEPT FAILED");
         } else {
-            memset(buff, 0, sizeof(buff));
-            if ((rval = recv(mysock, buff, sizeof(buff), 0)) < 0)
+            memset(buff, 0, 7000000);
+            if ((rval = recv(mysock, buff, 7000000, 0)) < 0)
                 perror("READING STREAM MESSAGE ERROR");
             else if (rval == 0)
                 printf("Ending connection");
             else
-                printf("MSG: %s\n", buff);
+                printf("MSG: %s\n", "LOL");
 
+               // XML_handler::parse_new_file(buff);
             printf("GOT THE MESSAGE (rval = %d)\n", rval);
-            string sendd="HOLAAAA";
+            string sendd=Archive_manager::return_archive("/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3", 0) ;
+            sendd.append("#");
                 send(mysock,sendd.c_str(), sendd.length(), 0);
-
-
+            usleep(1);
+            memset(buff, 0, 7000000);
+            receiveFile();
+            std::cout<<"Algun buffer"<<buff<<std::endl;
         }
 
     } while (1);
@@ -75,4 +84,45 @@ void OdysseyServer::start() {
 void OdysseyServer::send2(string to_send) {
 
     send(mysock,to_send.c_str(), to_send.length(),0);
+
+}
+void OdysseyServer::receiveFile() {
+    usleep(100000);
+    int x = 0;
+    std::stringstream to_return ;
+    while(true) {
+        std::cout<<"cosa"<<std::endl;
+        std::cout<<((to_return).str().back())<<std::endl;
+        recv(mysock, buffer, 7000000, 0);
+        std::cout<<buffer<<std::endl;
+        to_return<<buffer;
+        std::cout<<"??????????????????????????????????"<<std::endl;
+        std::cout<<(to_return.str())<<std::endl;
+        memset(buffer, 0, 7000000);
+        int x;
+        ioctl(mysock,FIONREAD,&x);
+        std::cout<<x<<std::endl;
+       // std::cout<<*to_return<<std::endl;
+        if(isXML((char*)to_return.str().c_str())){
+            break;
+        }
+    }
+    //std::cout<<*to_return<<std::endl;
+    xml_document<> doc;
+    char* cosa = doc.allocate_string(to_return.str().c_str());
+    XML_handler::parse_new_file(cosa);
+    return;
+}
+bool OdysseyServer::isXML(char *files) {
+    std::cout<<files<<std::endl;
+    try{
+
+        xml_document<> doc;
+        doc.parse<0>(files);
+        std::cout<<"LLEVO"<<std::endl;
+        return true;
+    }catch(parse_error error){
+        std::cout<<"ERROR AHI"<<std::endl;
+        return false;
+    }
 }
