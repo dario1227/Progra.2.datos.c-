@@ -63,7 +63,16 @@ Cancion* aux(string value)
     // value not present
     return nullptr;
 }
-Cancion* BinarySearch::start(string album){
+Lista<Cancion*>* BinarySearch::start(string album){
     BubbleSort::start(Cancion::Music);
-    return aux(album);
+    Cancion* find=aux(album);
+    Lista<Cancion*>*result=new Lista<Cancion*>();
+    Nodo<Cancion*>*temp=Cancion::Music->head;
+    while (temp!= nullptr){
+        if(temp->value->album==find->album){
+            result->add(temp->value);
+        }
+        temp=temp->next;
+    }
+    return result;
 }
