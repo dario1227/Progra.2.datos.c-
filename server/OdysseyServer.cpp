@@ -70,9 +70,9 @@ void OdysseyServer::start() {
 
                // XML_handler::parse_new_file(buff);
             printf("GOT THE MESSAGE (rval = %d)\n", rval);
-            string sendd=Archive_manager::return_archive("/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3", 0) ;
-            sendd.append("#");
-                send(mysock,sendd.c_str(), sendd.length(), 0);
+            //string sendd=Archive_manager::return_archive("/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3", 0) ;
+            //sendd.append("#");
+            //send(mysock,sendd.c_str(), sendd.length(), 0);
             usleep(1);
             memset(buff, 0, 7000000);
             receiveFile();
@@ -82,7 +82,7 @@ void OdysseyServer::start() {
     } while (1);
 }
 void OdysseyServer::send2(string to_send) {
-
+    to_send.append("#");
     send(mysock,to_send.c_str(), to_send.length(),0);
 
 }
@@ -105,7 +105,7 @@ void OdysseyServer::receiveFile() {
        // std::cout<<*to_return<<std::endl;
         if(isXML((char*)to_return.str().c_str())){
             XML_handler::primary_handler((char*)to_return.str().c_str());
-            return;
+            return receiveFile();
         }
     }
     //std::cout<<*to_return<<std::endl;

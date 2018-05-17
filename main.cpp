@@ -18,7 +18,7 @@
 #include "data/XML_generator.h"
 #include "server/OdysseyServer.h"
 #include "server/Server_Holder.h"
-#include "Estructuras/BinarySearch.h"
+#include "server/Holder.h"
 
 void carpeta(){
     struct passwd *pw = getpwuid(getuid());
@@ -41,7 +41,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    //JsonFactory::read();
+    JsonFactory::read();
     std::cout<<User::Users->length<<std::endl;
    // carpeta();
 //    PruebasXML::divide_audio();
@@ -52,18 +52,15 @@ int main(int argc, char **argv) {
 //    canciones->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","1000 anos sin ti"));
 //    XML_generator::create_Music_list(canciones);
 //    QApplication app(argc, argv);
-    new Cancion("Vicarious","10000Days","Tool","que ella amor");
-   new Cancion("Master","Master","Metallica","amor");
-    new Cancion("Hangar18","Rest in peace","Megadeth","dale");
-    new Cancion("Futile","Fear","Porcupine","dale duro que ella quiere amor");
-    new Cancion("Schism","Lateralus","Tool","dale duro que ella quiere");
-    cout<<Cancion::arbolb->Buscar_Nodo("Hangar18")->head->value->nombre;
-    cout<<Cancion::avl->Buscar("Porcupine")->head->value->artista;
-    cout<<BinarySearch::start("Lateralus")->album;
+   // new Cancion("Vicarious   ","10000Days  ","Tool     "," que ella amor");
+//    new Cancion("Master   ","Master ","Metallica    ","amor");
+//    new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","dale");
+//    new Cancion("Futile   ","Fear   ","Porcupine    ","dale duro que ella quiere amor");
+//    new Cancion("Schism    ","Lateralus","Tool   ","dale duro que ella quiere");
    // User* user1= new User("Kenneth","19","kennet117s","kennet117s");
-    //std::cout<<User::Users->get(0)->name<<std::endl;
-    User* user2= new User("kenneth","18","kennethpapi","darksouls");
-    std::cout<<user2->name<<std::endl;
+    std::cout<<User::Users->get(0)->name<<std::endl;
+ //   User* user2= new User("kenneth","18","kennethpapi","darksouls");
+  //  std::cout<<user2->name<<std::endl;
 //    User* user3= new User("Roger","18","Rogerbb","h12345");
   //  user1->addFriend(JsonFactory::makeUser(user2));
 //    user1->addFriend(JsonFactory::makeUser(user3));
@@ -80,9 +77,8 @@ int main(int argc, char **argv) {
       //      JsonFactory::save();
   //  PruebasXML::divide_audio();
     JsonFactory::save();
-    //OdysseyServer* server = new OdysseyServer();
-    //server->start();
-
+    Holder::odisea = new OdysseyServer();
+    Holder::odisea->start();
 
 //    cout<<Cancion::Music->head->next->value->nombre;
 //    cout<<User::Users->head->next->next->value->password;

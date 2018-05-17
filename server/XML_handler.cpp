@@ -12,6 +12,7 @@
 #include "../data/Data_Holder.h"
 #include "Archive_manager.h"
 #include "../data/base64.h"
+#include "Holder.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -62,19 +63,40 @@ void XML_handler::parse_song_requests(char *archive) {
 }
 void XML_handler::parse_xml_request_log(char *archive) {
     xml_document<> doc;
-    doc.parse<0>(archive);
+    doc.parse<parse_full>(archive);
     xml_node<> *root_node = doc.first_node("Root");
     xml_node<>* user = root_node->first_node("User");
-    char* name = user->first_attribute("Name")->value();
+    string name = user->first_attribute("Name")->value();
     char* password = user->first_attribute("Password")->value();
-    User *usuario = Data_Holder::users->search(name);
+    User *usuario = Data_Holder::users->search("kenneth");
+    std::cout<<name<<std::endl;
+    if(usuario== nullptr){
+        root_node->append_attribute(doc.allocate_attribute("Result","false"));
+        std::stringstream ss;
+        ss <<doc;
+        std::string result_xml = ss.str();
+        std::cout<<result_xml<<std::endl;
+        Holder::odisea->send2(result_xml);
+        return;
+    }
     if(usuario->password==password){
+        std::cout<<"WHY IM HERE PASSWORD"<<std::endl;
+
         root_node->append_attribute(doc.allocate_attribute("Result","true"));
+        std::stringstream ss;
+        ss <<doc;
+        std::string result_xml = ss.str();
+        Holder::odisea->send2(result_xml);
 
         return;
     }
     else{
+        std::cout<<"WHY IM HERE NO PASSWORD"<<std::endl;
         root_node->append_attribute(doc.allocate_attribute("Result","false"));
+        std::stringstream ss;
+        ss <<doc;
+        std::string result_xml = ss.str();
+        Holder::odisea->send2(result_xml);
 
         return;
     }
@@ -89,27 +111,45 @@ void XML_handler::parse_new_user(char *archive) {
     char* id = user->first_attribute("ID")->value();
     char* password = user->first_attribute("Password")->value();
     if (Data_Holder::users->search(name)!= nullptr){
+        root_node->append_attribute(doc.allocate_attribute("Result","false"));
+        std::stringstream ss;
+        ss <<doc;
+        std::string result_xml = ss.str();
+        std::cout<<result_xml<<std::endl;
+        Holder::odisea->send2(result_xml);
         return;
     }
-    Data_Holder::users->insertar(name, new User(name,age,id,password));
+    root_node->append_attribute(doc.allocate_attribute("Result","true"));
+    std::stringstream ss;
+    ss <<doc;
+    std::string result_xml = ss.str();
+    std::cout<<result_xml<<std::endl;
+    Holder::odisea->send2(result_xml);
+    new User(name,age,id,password);
 
 
 }
 void XML_handler::primary_handler(char *archivo) {
+    std::stringstream to_return ;
+    to_return<<archivo;
     xml_document<> doc;
     doc.parse<0>(archivo);
     xml_node<> *root_node = doc.first_node("Root");
-    char* operacion = root_node->first_attribute("Operation")->value();
+    string operacion = root_node->first_attribute("Operation")->value();
+    std::cout<<operacion<<std::endl;
+    std::cout<< (operacion=="Log") <<std::endl;
     if(operacion=="Upload"){
         parse_new_file(archivo);
         return;
     }
     if(operacion=="Register"){
-        parse_new_user(archivo);
+        parse_new_user((char*)to_return.str().c_str());
         return;
     }
     if (operacion=="Log"){
-        parse_xml_request_log(archivo);
+        std::cout<<"LOOOOOG"<<std::endl;
+
+        parse_xml_request_log((char*)to_return.str().c_str());
         return;
     }
     if(operacion=="Songs"){
