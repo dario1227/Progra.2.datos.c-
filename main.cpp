@@ -18,6 +18,7 @@
 #include "data/XML_generator.h"
 #include "server/OdysseyServer.h"
 #include "server/Server_Holder.h"
+#include "server/Holder.h"
 
 void carpeta(){
     struct passwd *pw = getpwuid(getuid());
@@ -58,8 +59,8 @@ int main(int argc, char **argv) {
 //    new Cancion("Schism    ","Lateralus","Tool   ","dale duro que ella quiere");
    // User* user1= new User("Kenneth","19","kennet117s","kennet117s");
     std::cout<<User::Users->get(0)->name<<std::endl;
-    User* user2= new User("kenneth","18","kennethpapi","darksouls");
-    std::cout<<user2->name<<std::endl;
+ //   User* user2= new User("kenneth","18","kennethpapi","darksouls");
+  //  std::cout<<user2->name<<std::endl;
 //    User* user3= new User("Roger","18","Rogerbb","h12345");
   //  user1->addFriend(JsonFactory::makeUser(user2));
 //    user1->addFriend(JsonFactory::makeUser(user3));
@@ -76,8 +77,8 @@ int main(int argc, char **argv) {
       //      JsonFactory::save();
   //  PruebasXML::divide_audio();
     JsonFactory::save();
-    OdysseyServer* server = new OdysseyServer();
-    server->start();
+    Holder::odisea = new OdysseyServer();
+    Holder::odisea->start();
 
 //    cout<<Cancion::Music->head->next->value->nombre;
 //    cout<<User::Users->head->next->next->value->password;

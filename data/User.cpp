@@ -3,6 +3,7 @@
 //
 
 #include "User.h"
+#include "Data_Holder.h"
 
 static int counter = 0;
 HashMap *User::UserHash=new HashMap();
@@ -20,6 +21,8 @@ this->age=age;
     UserHash->Insert(counter, this);
     User::Users->add(this);
     counter++;
+    Data_Holder::users->insertar(name,this);
+
 
 }
 User::User(){

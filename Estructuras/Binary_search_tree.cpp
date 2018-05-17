@@ -6,6 +6,8 @@
 User* Binary_search_tree::search(string name) {
     Node* actual = root;
     while(actual!= nullptr){
+        std::cout<<"___________________________________________________________________"<<std::endl;
+        std::cout<<actual->data<<std::endl;
         if(actual->data==name){
             return actual->usuario;
         }
@@ -20,7 +22,9 @@ User* Binary_search_tree::search(string name) {
 }
 
 void Binary_search_tree::insertar(string numero, User *usuario) {
-    Node* newNode = new Node(usuario);
+    Node* newNode = new Node(usuario,numero);
+    std::cout<<"GUARDE EL HIJUAPUTA MIERDA"<<std::endl;
+
     if(root== nullptr){
         root=newNode;
         return;
