@@ -6,6 +6,15 @@
 #include <zconf.h>
 #include <pwd.h>
 #include "JsonFactory.h"
+string chop(string data){
+    string name=data;
+    name.resize(name.length()-1);
+    std::reverse(name.begin(), name.end());
+    name.resize(name.length()-1);
+    std::reverse(name.begin(), name.end());
+    return name;
+
+}
 void readaux(string data){
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
@@ -18,7 +27,7 @@ void readaux(string data){
     if(data=="Canciones"){
         while(y!=z){
             json_object* temp=json_object_array_get_idx(datos,y);
-            new Cancion(json_object_to_json_string(json_object_object_get(temp,"name")),json_object_to_json_string(json_object_object_get(temp,"album")),json_object_to_json_string(json_object_object_get(temp,"artist")),json_object_to_json_string(json_object_object_get(temp,"lyrics")));
+            new Cancion(chop(json_object_to_json_string(json_object_object_get(temp,"name"))),chop(json_object_to_json_string(json_object_object_get(temp,"album"))),chop(json_object_to_json_string(json_object_object_get(temp,"artist"))),chop(json_object_to_json_string(json_object_object_get(temp,"lyrics"))));
             y++;
 
         }
@@ -26,7 +35,7 @@ void readaux(string data){
     else{
         while(y!=z){
             json_object* temp=json_object_array_get_idx(datos,y);
-            new User(json_object_to_json_string(json_object_object_get(temp,"name")),json_object_to_json_string(json_object_object_get(temp,"age")),json_object_to_json_string(json_object_object_get(temp,"ID")),json_object_to_json_string(json_object_object_get(temp,"password")));
+            new User(chop(json_object_to_json_string(json_object_object_get(temp,"name"))),chop(json_object_to_json_string(json_object_object_get(temp,"age"))),chop(json_object_to_json_string(json_object_object_get(temp,"ID"))),chop(json_object_to_json_string(json_object_object_get(temp,"password"))));
             y++;
 
         }
