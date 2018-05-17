@@ -87,7 +87,7 @@ void OdysseyServer::send2(string to_send) {
 
 }
 void OdysseyServer::receiveFile() {
-    usleep(100000);
+    usleep(1000);
     int x = 0;
     std::stringstream to_return ;
     while(true) {
@@ -104,7 +104,8 @@ void OdysseyServer::receiveFile() {
         std::cout<<x<<std::endl;
        // std::cout<<*to_return<<std::endl;
         if(isXML((char*)to_return.str().c_str())){
-            break;
+            XML_handler::primary_handler((char*)to_return.str().c_str());
+            return;
         }
     }
     //std::cout<<*to_return<<std::endl;
