@@ -137,9 +137,9 @@ void XML_handler::primary_handler(char *archivo) {
     xml_node<> *root_node = doc.first_node("Root");
     string operacion = root_node->first_attribute("Operation")->value();
     std::cout<<operacion<<std::endl;
-    std::cout<< (operacion=="Log") <<std::endl;
+    std::cout<< operacion <<std::endl;
     if(operacion=="Upload"){
-        parse_new_file(archivo);
+        parse_new_file((char*)to_return.str().c_str());
         return;
     }
     if(operacion=="Register"){
@@ -153,11 +153,11 @@ void XML_handler::primary_handler(char *archivo) {
         return;
     }
     if(operacion=="Songs"){
-        parse_song_requests(archivo);
+        parse_song_requests((char*)to_return.str().c_str());
         return;
     }
     if(operacion=="Stream"){
-        parse_chunk(archivo);
+        parse_chunk((char*)to_return.str().c_str());
         return;
     }
 
@@ -179,16 +179,46 @@ void XML_handler::parse_chunk(char *archivo) {
 }
 
 void XML_handler::parse_new_file(char *archivo) {
-std::cout<<"llego"<<archivo<<std::endl;
-    xml_document<> doc;
-    doc.parse<0>(archivo);
-    xml_node<> *root_node = doc.first_node("Root");
-    xml_node<>* nodo = root_node->first_node("Archive");
-    char* archive = nodo->first_attribute("File")->value();
-    string str = base64::base64_decode(archive);
-    FILE* oFile;
-    std::cout<<str<<std::endl;
-    oFile = fopen ( "SALVADO.mp3" , "wb" );
-    fwrite(str.c_str(), str.size(),1,oFile);
+    try {
+       // std::cout << "llego" << archivo << std::endl;
+        xml_document<> doc;
+        doc.parse<0>(archivo);
+        xml_node<> *root_node = doc.first_node("Root");
+        xml_node<> *nodo = root_node->first_node("Archive");
+        char *archive = nodo->first_attribute("File")->value();
+        char *filename = nodo->first_attribute("Filename")->value();
+        string str = base64::base64_decode(archive);
+        FILE *oFile;
+        //std::cout << str << std::endl;
+        oFile = fopen(filename, "wb");
+        fwrite(str.c_str(), str.size(), 1, oFile);
+        root_node->remove_first_node();
+        root_node->append_attribute(doc.allocate_attribute("Result","true"));
+        std::stringstream ss;
+        ss <<doc;
+        std::string result_xml = ss.str();
+        std::cout<<result_xml<<std::endl;
+        Holder::odisea->send2(result_xml);
 
+    }catch (exception){
+        std::cout << "llego" << archivo << std::endl;
+        xml_document<> doc;
+        doc.parse<0>(archivo);
+        xml_node<> *root_node = doc.first_node("Root");
+        xml_node<> *nodo = root_node->first_node("Archive");
+        char *archive = nodo->first_attribute("File")->value();
+        char *filename = nodo->first_attribute("Filename")->value();
+        string str = base64::base64_decode(archive);
+        FILE *oFile;
+        std::cout << str << std::endl;
+        oFile = fopen(filename, "wb");
+        fwrite(str.c_str(), str.size(), 1, oFile);
+        doc.remove_node(nodo);
+        root_node->append_attribute(doc.allocate_attribute("Result","false"));
+        std::stringstream ss;
+        ss <<doc;
+        std::string result_xml = ss.str();
+        std::cout<<result_xml<<std::endl;
+        Holder::odisea->send2(result_xml);
+    }
 }
