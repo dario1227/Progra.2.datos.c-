@@ -124,7 +124,7 @@ void XML_handler::parse_new_user(char *archive) {
     root_node->append_attribute(doc.allocate_attribute("Result","true"));
     std::stringstream ss;
     ss <<doc;
-    Factory::User(name,age,id,password);
+    Factory::User2(name,age,id,password);
 
     std::string result_xml = ss.str();
     std::cout<<result_xml<<std::endl;
@@ -191,9 +191,9 @@ void XML_handler::parse_new_file(char *archivo) {
         xml_node<> *nodo = root_node->first_node("Archive");
         char *archive = nodo->first_attribute("File")->value();
         char *filename = nodo->first_attribute("Filename")->value();
-        char* letra = nodo->first_attribute("Letra")->value();
-        char* artista = nodo->first_attribute("Artista")->value();
-        char* Album = nodo->first_attribute("Album")->value();
+        char* letra = root_node->first_attribute("Letra")->value();
+        char* artista = root_node->first_attribute("Artista")->value();
+        char* Album = root_node->first_attribute("Album")->value();
 
         string str = base64::base64_decode(archive);
         FILE *oFile;
@@ -206,7 +206,7 @@ void XML_handler::parse_new_file(char *archivo) {
         ss <<doc;
         std::string result_xml = ss.str();
         std::cout<<result_xml<<std::endl;
-        Factory::Cancion(filename,Album,artista,letra);
+        Factory::Cancion2(filename,Album,artista,letra);
         Holder::odisea->send2(result_xml);
 
     }catch (exception){

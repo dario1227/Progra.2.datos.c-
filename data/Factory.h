@@ -9,8 +9,8 @@
 using namespace std;
 class Factory {
 public:
- static void   Cancion(string nombre,string album, string artista, string letra);
- static void User(string name, string age, string ID, string password);
+ static void   Cancion2(string nombre,string album, string artista, string letra);
+ static void User2(string name, string age, string ID, string password);
 };
 
 

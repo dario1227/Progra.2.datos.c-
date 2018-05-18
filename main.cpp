@@ -42,22 +42,22 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    //JsonFactory::read();
-    std::cout<<User::Users->length<<std::endl;
-   // carpeta();
-//    PruebasXML::divide_audio();
-//    PruebasXML::prueba2();
-//    Lista<Cancion*>* canciones = new Lista<Cancion*>();
-//    canciones->add( new Cancion("Vicarious   ","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
-//    canciones->add(new Cancion("Master   ","Master ","Metallica    ","DALE LA MADRE QUE TE TRAKP"));
-//    canciones->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","1000 anos sin ti"));
-//    XML_generator::create_Music_list(canciones);
-//    QApplication app(argc, argv);
-    new Cancion("Vicarious","10000Days","Tool","que ella amor");
-    new Cancion("Master","Master","Metallica","amor");
-    new Cancion("Hangar18","Rest in peace","Megadeth","dale");
-    new Cancion("Futile","Fear","Porcupine","dale duro que ella quiere amor");
-    new Cancion("Schism","Lateralus","Tool","dale duro que ella quiere");
+    JsonFactory::read();
+//    std::cout<<User::Users->length<<std::endl;
+//   // carpeta();
+////    PruebasXML::divide_audio();
+////    PruebasXML::prueba2();
+////    Lista<Cancion*>* canciones = new Lista<Cancion*>();
+////    canciones->add( new Cancion("Vicarious   ","10000Days  Y MAD COADADAHFKLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFUWWWWWWWWWWWWWW","Tool     "," que ella amor"));
+////    canciones->add(new Cancion("Master   ","Master ","Metallica    ","DALE LA MADRE QUE TE TRAKP"));
+////    canciones->add(new Cancion("Hangar18   ","Rest in peace  ","Megadeth    ","1000 anos sin ti"));
+////    XML_generator::create_Music_list(canciones);
+////    QApplication app(argc, argv);
+//    new Cancion("Vicarious","10000Days","Tool","que ella amor");
+//    new Cancion("Master","Master","Metallica","amor");
+//    new Cancion("Hangar18","Rest in peace","Megadeth","dale");
+//    new Cancion("Futile","Fear","Porcupine","dale duro que ella quiere amor");
+//    new Cancion("Schism","Lateralus","Tool","dale duro que ella quiere");
    // User* user1= new User("Kenneth","19","kennet117s","kennet117s");
     //std::cout<<User::Users->get(0)->name<<std::endl;
  //   User* user2= new User("kenneth","18","kennethpapi","darksouls");
@@ -78,9 +78,9 @@ int main(int argc, char **argv) {
       //      JsonFactory::save();
   //  PruebasXML::divide_audio();
    // JsonFactory::save();
-    cout<<BinarySearch::start("Lateralus")->length;
-    //Holder::odisea = new OdysseyServer();
-    //Holder::odisea->start();
+  //  cout<<BinarySearch::start("Lateralus")->length;
+    Holder::odisea = new OdysseyServer();
+    Holder::odisea->start();
 
 //    cout<<Cancion::Music->head->next->value->nombre;
 //    cout<<User::Users->head->next->next->value->password;

@@ -30,6 +30,7 @@ Cancion::Cancion() {
     num++;
 }
 Cancion::Cancion(string nombre, string album, string artista, string letra) {
+    std::cout<<"Llegue a esto"<<std::endl;
     this->nombre= nombre;
     this->album= album;
     this->pos=num;
