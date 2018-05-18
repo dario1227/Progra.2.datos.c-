@@ -13,6 +13,7 @@
 #include "Archive_manager.h"
 #include "../data/base64.h"
 #include "Holder.h"
+#include "../data/Factory.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -23,30 +24,31 @@ void XML_handler::parse_song_requests(char *archive) {
     doc.parse<0>(archive);
     xml_node<> *root_node = doc.first_node("Root");
     char* metodo = root_node->first_attribute("Method")->value();
+    char* busqueda = root_node->first_attribute("Busqueda")->value();
     if(metodo=="Autor"){
         //debe cambiar a metodos de busqueda ahi
-        Lista<Cancion*>* lista = new Lista<Cancion*>();
+        Lista<Cancion*>* lista = Cancion::avl->Buscar(busqueda);
         xml_document<>* documento = XML_generator::create_Music_list(lista);
         std::stringstream ss;
-        ss <<doc;
+        ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
     }
     if(metodo=="Album"){
         //debe cambiar a metodos de busqueda ahi
-        Lista<Cancion*>* lista = new Lista<Cancion*>();
+        Lista<Cancion*>* lista = Cancion::Music;
         xml_document<>* documento = XML_generator::create_Music_list(lista);
         std::stringstream ss;
-        ss <<doc;
+        ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
     }
-    if(metodo=="Artista"){
+    if(metodo=="Nombre"){
         //debe cambiar a metodos de busqueda ahi
-        Lista<Cancion*>* lista = new Lista<Cancion*>();
+        Lista<Cancion*>* lista = Cancion::arbolb->Buscar_Nodo(busqueda);
         xml_document<>* documento = XML_generator::create_Music_list(lista);
         std::stringstream ss;
-        ss <<doc;
+        ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
     }
@@ -55,7 +57,7 @@ void XML_handler::parse_song_requests(char *archive) {
         Lista<Cancion*>* lista = new Lista<Cancion*>();
         xml_document<>* documento = XML_generator::create_Music_list(lista);
         std::stringstream ss;
-        ss <<doc;
+        ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
     }
@@ -122,6 +124,8 @@ void XML_handler::parse_new_user(char *archive) {
     root_node->append_attribute(doc.allocate_attribute("Result","true"));
     std::stringstream ss;
     ss <<doc;
+    Factory::User(name,age,id,password);
+
     std::string result_xml = ss.str();
     std::cout<<result_xml<<std::endl;
     Holder::odisea->send2(result_xml);
@@ -187,6 +191,10 @@ void XML_handler::parse_new_file(char *archivo) {
         xml_node<> *nodo = root_node->first_node("Archive");
         char *archive = nodo->first_attribute("File")->value();
         char *filename = nodo->first_attribute("Filename")->value();
+        char* letra = nodo->first_attribute("Letra")->value();
+        char* artista = nodo->first_attribute("Artista")->value();
+        char* Album = nodo->first_attribute("Album")->value();
+
         string str = base64::base64_decode(archive);
         FILE *oFile;
         //std::cout << str << std::endl;
@@ -198,6 +206,7 @@ void XML_handler::parse_new_file(char *archivo) {
         ss <<doc;
         std::string result_xml = ss.str();
         std::cout<<result_xml<<std::endl;
+        Factory::Cancion(filename,Album,artista,letra);
         Holder::odisea->send2(result_xml);
 
     }catch (exception){

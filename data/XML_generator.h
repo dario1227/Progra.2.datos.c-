@@ -17,6 +17,10 @@ public:
     static xml_document<>* create_Music_list(Lista<Cancion*> *canciones);
 
     static void create_music_helper(xml_document<>*,xml_node<>* root,Cancion *cancion);
+
+    xml_document<> *create_Music_list3(Lista<Cancion *> *canciones);
+
+    xml_document<> *create_Music_list2(Lista<Cancion *> *canciones);
 };
 
 
