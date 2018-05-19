@@ -26,10 +26,11 @@ void XML_handler::parse_song_requests(char *archive) {
     doc.parse<0>(archive);
     xml_node<> *root_node = doc.first_node("Root");
     char* metodo = root_node->first_attribute("Method")->value();
+    QString metodo2 = QString(metodo);
     char* busqueda = root_node->first_attribute("Busqueda")->value();
     string page = root_node->first_attribute("Page")->value();
     int x= stoi(page);
-    if(metodo=="Autor"){
+    if(metodo2.contains("Autor")){
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = Cancion::avl->Buscar(busqueda);
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
@@ -37,10 +38,11 @@ void XML_handler::parse_song_requests(char *archive) {
         ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
-        Holder::odisea->send2(result_xml);
+        Holder::odisea->send2(result_xml.c_str());
 
     }
-    if(metodo=="Album"){
+    if(metodo2.contains("Album")){
+        //
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = BinarySearch::start(busqueda);
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
@@ -48,20 +50,20 @@ void XML_handler::parse_song_requests(char *archive) {
         ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
-        Holder::odisea->send2(result_xml);
+        Holder::odisea->send2(result_xml.c_str());
     }
-    if(metodo=="Nombre"){
+    if(metodo2.contains("Nombre")){
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = Cancion::arbolb->Buscar_Nodo(busqueda);
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
         std::string result_xml = ss.str();
-        char* variable =(char*) result_xml.c_str();
-        Holder::odisea->send2(result_xml);
+       // char* variable =(char*) result_xml.c_str();
+        Holder::odisea->send2(result_xml.c_str());
 
     }
-    if(metodo=="Letra"){
+    if(metodo2.contains("Letra")){
         //debe cambiar a metodos de busqueda ahi
         Cancion* cancion = BackTracking::start(Cancion::Music,busqueda);
         xml_document<>* documento = new xml_document<>() ;
@@ -73,7 +75,8 @@ void XML_handler::parse_song_requests(char *archive) {
         xml_node<>* root = documento->allocate_node(node_element, "Root");
         root->append_attribute(documento->allocate_attribute("Operation", "Music List"));
         if(cancion == nullptr){
-            root->append_attribute(documento->allocate_attribute("Result","false"));
+            std::cout<<"LLEGUE AQUI NO SE"<<std::endl
+;            root->append_attribute(documento->allocate_attribute("Result","false"));
             documento->append_node(root);
             std::stringstream ss;
             ss <<(*documento);
@@ -81,6 +84,8 @@ void XML_handler::parse_song_requests(char *archive) {
             Holder::odisea->send2(result_xml);
             return;
         }
+        std::cout<<"LLEGUE AQUI NO SE 3333333333333333"<<std::endl;
+
         xml_node<>* child = documento->allocate_node(node_element, "Cancion");
         char *letra = documento->allocate_string(cancion->letra->toLatin1().data());
         char* calificacion = documento->allocate_string(std::to_string(cancion->calificacion).c_str());

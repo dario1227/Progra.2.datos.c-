@@ -20,16 +20,17 @@ xml_document<>* XML_generator::create_Music_list(Lista<Cancion*> *canciones,int 
     doc->append_node(decl);
     xml_node<>* root = doc->allocate_node(node_element, "Root");
     root->append_attribute(doc->allocate_attribute("Operation", "Music List"));
-
+    root->append_attribute(doc->allocate_attribute("Result","true"));
     Nodo<Cancion*>* actual = canciones->head;
     while(actual!= nullptr&&index!=page){
         actual=actual->next;
         index++;
     }
-    while(actual!= nullptr){
+    while(actual!= nullptr&&index<limite){
+        index++;
         create_music_helper(doc,root,actual->value);
         actual=actual->next;
-
+        int x =23;
     }
     doc->append_node(root);
     std::stringstream ss;
