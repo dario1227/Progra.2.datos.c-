@@ -20,6 +20,7 @@
 #include "server/Server_Holder.h"
 #include "server/Holder.h"
 #include "Estructuras/BinarySearch.h"
+#include "data/Factory.h"
 
 void carpeta(){
     struct passwd *pw = getpwuid(getuid());
@@ -43,6 +44,14 @@ void print(Lista<Cancion*>*lista){
 }
 int main(int argc, char **argv) {
     JsonFactory::read();
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+//    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
+
 //    std::cout<<User::Users->length<<std::endl;
 //   // carpeta();
 ////    PruebasXML::divide_audio();

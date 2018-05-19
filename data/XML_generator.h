@@ -14,7 +14,7 @@ using namespace std;
 class XML_generator {
 public:
     static int index;
-    static xml_document<>* create_Music_list(Lista<Cancion*> *canciones);
+    static xml_document<>* create_Music_list(Lista<Cancion*> *canciones,int co);
 
     static void create_music_helper(xml_document<>*,xml_node<>* root,Cancion *cancion);
 

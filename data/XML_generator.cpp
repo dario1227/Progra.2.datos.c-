@@ -9,9 +9,11 @@
 #include "rapidxml_print.hpp"
 #include "rapidxml_utils.hpp"
 int XML_generator::index = 0;
-xml_document<>* XML_generator::create_Music_list(Lista<Cancion*> *canciones) {
+xml_document<>* XML_generator::create_Music_list(Lista<Cancion*> *canciones,int pagina) {
+    int index = 0;
     xml_document<>* doc = new xml_document<>() ;
-
+    int page = pagina*5 -5;
+    int limite= pagina*5;
     xml_node<>* decl = doc->allocate_node(node_declaration);
     decl->append_attribute(doc->allocate_attribute("version", "1.0"));
     decl->append_attribute(doc->allocate_attribute("encoding", "utf-8"));
@@ -20,6 +22,10 @@ xml_document<>* XML_generator::create_Music_list(Lista<Cancion*> *canciones) {
     root->append_attribute(doc->allocate_attribute("Operation", "Music List"));
 
     Nodo<Cancion*>* actual = canciones->head;
+    while(actual!= nullptr&&index!=page){
+        actual=actual->next;
+        index++;
+    }
     while(actual!= nullptr){
         create_music_helper(doc,root,actual->value);
         actual=actual->next;
@@ -94,11 +100,15 @@ void XML_generator::create_music_helper(xml_document<>* doc,xml_node<> *root, Ca
     xml_node<>* child = doc->allocate_node(node_element, "Cancion");
     char *letra = doc->allocate_string(cancion->letra->toLatin1().data());
     char* calificacion = doc->allocate_string(std::to_string(cancion->calificacion).c_str());
+    char* nombre = doc->allocate_string(cancion->nombre.c_str());
+    char* album = doc->allocate_string(cancion->album.c_str());
+    char* artista=doc->allocate_string(cancion->artista.c_str());
+
     child->append_attribute(doc->allocate_attribute("Letra", letra));
-    child->append_attribute(doc->allocate_attribute("Nombre", (const char*)cancion->nombre.c_str()));
-    child->append_attribute(doc->allocate_attribute("Albun", (const char*)cancion->album.c_str()));
+    child->append_attribute(doc->allocate_attribute("Nombre", nombre));
+    child->append_attribute(doc->allocate_attribute("Album", album));
     child->append_attribute(doc->allocate_attribute("Calificacion",calificacion ));
-    child->append_attribute(doc->allocate_attribute("Artista", (const char*)cancion->artista.c_str()));
+    child->append_attribute(doc->allocate_attribute("Artista", artista));
     root->append_node(child);
 
 }

@@ -14,6 +14,8 @@
 #include "../data/base64.h"
 #include "Holder.h"
 #include "../data/Factory.h"
+#include "../Estructuras/BinarySearch.h"
+#include "../Estructuras/BackTracking.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -25,41 +27,80 @@ void XML_handler::parse_song_requests(char *archive) {
     xml_node<> *root_node = doc.first_node("Root");
     char* metodo = root_node->first_attribute("Method")->value();
     char* busqueda = root_node->first_attribute("Busqueda")->value();
+    string page = root_node->first_attribute("Page")->value();
+    int x= stoi(page);
     if(metodo=="Autor"){
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = Cancion::avl->Buscar(busqueda);
-        xml_document<>* documento = XML_generator::create_Music_list(lista);
+        xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
+        Holder::odisea->send2(result_xml);
+
     }
     if(metodo=="Album"){
         //debe cambiar a metodos de busqueda ahi
-        Lista<Cancion*>* lista = Cancion::Music;
-        xml_document<>* documento = XML_generator::create_Music_list(lista);
+        Lista<Cancion*>* lista = BinarySearch::start(busqueda);
+        xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
+        Holder::odisea->send2(result_xml);
     }
     if(metodo=="Nombre"){
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = Cancion::arbolb->Buscar_Nodo(busqueda);
-        xml_document<>* documento = XML_generator::create_Music_list(lista);
+        xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
+        Holder::odisea->send2(result_xml);
+
     }
     if(metodo=="Letra"){
         //debe cambiar a metodos de busqueda ahi
-        Lista<Cancion*>* lista = new Lista<Cancion*>();
-        xml_document<>* documento = XML_generator::create_Music_list(lista);
+        Cancion* cancion = BackTracking::start(Cancion::Music,busqueda);
+        xml_document<>* documento = new xml_document<>() ;
+
+        xml_node<>* decl = documento->allocate_node(node_declaration);
+        decl->append_attribute(documento->allocate_attribute("version", "1.0"));
+        decl->append_attribute(documento->allocate_attribute("encoding", "utf-8"));
+        documento->append_node(decl);
+        xml_node<>* root = documento->allocate_node(node_element, "Root");
+        root->append_attribute(documento->allocate_attribute("Operation", "Music List"));
+        if(cancion == nullptr){
+            root->append_attribute(documento->allocate_attribute("Result","false"));
+            documento->append_node(root);
+            std::stringstream ss;
+            ss <<(*documento);
+            std::string result_xml = ss.str();
+            Holder::odisea->send2(result_xml);
+            return;
+        }
+        xml_node<>* child = documento->allocate_node(node_element, "Cancion");
+        char *letra = documento->allocate_string(cancion->letra->toLatin1().data());
+        char* calificacion = documento->allocate_string(std::to_string(cancion->calificacion).c_str());
+        char* nombre = documento->allocate_string(cancion->nombre.c_str());
+        char* album = documento->allocate_string(cancion->album.c_str());
+        char* artista=documento->allocate_string(cancion->artista.c_str());
+        child->append_attribute(documento->allocate_attribute("Letra", letra));
+        child->append_attribute(documento->allocate_attribute("Nombre", nombre));
+        child->append_attribute(documento->allocate_attribute("Album", album));
+        child->append_attribute(documento->allocate_attribute("Calificacion",calificacion ));
+        child->append_attribute(documento->allocate_attribute("Artista", artista));
+        root->append_attribute(documento->allocate_attribute("Result","true"));
+        root->append_node(child);
+        documento->append_node(root);
         std::stringstream ss;
         ss <<(*documento);
         std::string result_xml = ss.str();
         char* variable =(char*) result_xml.c_str();
+        Holder::odisea->send2(result_xml);
+
     }
 
 }
