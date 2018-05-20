@@ -76,6 +76,7 @@ void OdysseyServer::start() {
             usleep(1);
             memset(buff, 0, 7000000);
             receiveFile();
+            send2("FAFAFAFAF");
             std::cout<<"Algun buffer"<<buff<<std::endl;
         }
 
