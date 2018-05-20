@@ -222,9 +222,14 @@ void XML_handler::parse_chunk(char *archivo) {
     int chunk = stoi(num);
     char* name = root_node->first_attribute("Filename")->value();
     char* archive = doc.allocate_string(Archive_manager::return_archive(name,chunk));
-    xml_node<>* child = doc.allocate_node(node_element, "Archive");
-    child->append_attribute(doc.allocate_attribute("Data",archive));
-    root_node->append_node(child);
+  //  xml_node<>* child = doc.allocate_node(node_element, "Archive");
+    root_node->append_attribute(doc.allocate_attribute("Data",archive));
+  //  root_node->append_node(child);
+    std::stringstream ss;
+    ss <<doc;
+    std::string result_xml = ss.str();
+    std::cout<<result_xml<<std::endl;
+    Holder::odisea->send2(result_xml);
 
 }
 

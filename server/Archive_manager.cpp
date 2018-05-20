@@ -30,11 +30,11 @@ char* Archive_manager::return_archive(char *filename, int chunk) {
 //
     buffer = (char*) malloc (sizeof(char)*lSize);
     if (buffer == NULL) {fputs ("Memory error",stderr); }
-    long chunksize = lSize*0.02;
+    long chunksize = lSize;
 
     result = fread (buffer,1,lSize,iFile);
  char* pedazo = Archive_manager::divide_chunk(buffer,chunksize,chunksize*chunk,chunksize*chunk+chunksize);
- std::string* parseado = new std::string(base64::base64_encode(reinterpret_cast<const unsigned char *>(pedazo), chunksize).c_str());
+ std::string* parseado = new std::string(base64::base64_encode(reinterpret_cast<const unsigned char *>(buffer), lSize).c_str());
  //std::cout<<"ME DIOO ESTO"<<parseado<<std::endl;
     return const_cast<char *>(parseado->c_str());
 }
