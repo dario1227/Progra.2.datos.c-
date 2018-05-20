@@ -42,7 +42,7 @@ char* Archive_manager::divide_chunk(char *archive, long chunksize, long limit1, 
     char* buffer = new char[chunksize];
     int x =0;
     while(x<chunksize){
-        buffer[x]=archive[limit1+x];
+        buffer[x]=archive[x];
         x++;
     }
     return buffer;
