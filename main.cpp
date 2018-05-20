@@ -21,6 +21,7 @@
 #include "server/Holder.h"
 #include "Estructuras/BinarySearch.h"
 #include "data/Factory.h"
+#include "server/Server.h"
 
 void carpeta(){
     struct passwd *pw = getpwuid(getuid());
@@ -43,7 +44,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    JsonFactory::read();
+    //JsonFactory::read();
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
@@ -88,10 +89,12 @@ int main(int argc, char **argv) {
   //  PruebasXML::divide_audio();
    // JsonFactory::save();
   //  cout<<BinarySearch::start("Lateralus")->length;
-    Holder::odisea = new OdysseyServer();
-    Holder::odisea->start();
+   // Holder::odisea = new OdysseyServer();
+    //Holder::odisea->start();
 
 //    cout<<Cancion::Music->head->next->value->nombre;
 //    cout<<User::Users->head->next->next->value->password;
+    OdysseyServer* server = new OdysseyServer();
+    server->start();
     return 0;
 }
