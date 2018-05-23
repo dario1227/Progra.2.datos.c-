@@ -28,6 +28,7 @@ public:
     static ArbolB* arbolb;
     static AVL* avl;
     static void order(Lista<Cancion*>*music);
+    static void erase(string name, string artist, string album);
 
 };
 
