@@ -17,11 +17,12 @@ class AVL;
 class Cancion {
 public:
     Cancion();
-    Cancion(string nombre,string album, string artista, string letra);
+    Cancion(string nombre,string album, string artista, string letra, string genero);
     int pos;
     string nombre;
     string album;
     string artista;
+    string genero;
     QString *letra;
     int calificacion;
     static Lista<Cancion*>*Music;

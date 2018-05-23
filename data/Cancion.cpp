@@ -51,17 +51,19 @@ Cancion::Cancion() {
     this->letra= nullptr;
     this->pos=num;
     this->calificacion=0;
+    this->genero= nullptr;
     Cancion::Music->add(this);
     Cancion::arbolb->Insertar_Nodo(num);
     Cancion::avl->Insertar(num);
     num++;
 }
 //
-Cancion::Cancion(string nombre, string album, string artista, string letra) {
+Cancion::Cancion(string nombre, string album, string artista, string letra, string genero) {
     std::cout<<"Llegue a esto"<<std::endl;
     this->nombre= nombre;
     this->album= album;
     this->pos=num;
+    this->genero=genero;
     this->artista= artista;
     this->letra= new QString(letra.c_str());
     this->calificacion=0;

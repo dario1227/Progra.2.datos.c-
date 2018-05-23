@@ -27,7 +27,7 @@ void readaux(string data){
     if(data=="Canciones"){
         while(y!=z){
             json_object* temp=json_object_array_get_idx(datos,y);
-            new Cancion(chop(json_object_to_json_string(json_object_object_get(temp,"name"))),chop(json_object_to_json_string(json_object_object_get(temp,"album"))),chop(json_object_to_json_string(json_object_object_get(temp,"artist"))),chop(json_object_to_json_string(json_object_object_get(temp,"lyrics"))));
+            new Cancion(chop(json_object_to_json_string(json_object_object_get(temp,"name"))),chop(json_object_to_json_string(json_object_object_get(temp,"album"))),chop(json_object_to_json_string(json_object_object_get(temp,"artist"))),chop(json_object_to_json_string(json_object_object_get(temp,"lyrics"))),chop(json_object_to_json_string(json_object_object_get(temp,"genero"))));
             y++;
 
         }
@@ -104,6 +104,8 @@ json_object* JsonFactory::makeSong(Cancion *song) {
     toAdd = json_object_new_string(song->artista.c_str());
     json_object_object_add(objeto,"artist",toAdd);
     toAdd = json_object_new_string(song->album.c_str());
+    json_object_object_add(objeto,"genero",toAdd);
+    toAdd = json_object_new_string(song->genero.c_str());
     json_object_object_add(objeto,"album",toAdd);
     toAdd = json_object_new_string(song->letra->toStdString().c_str());
     json_object_object_add(objeto,"lyrics",toAdd);
