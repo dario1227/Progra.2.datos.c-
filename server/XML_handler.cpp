@@ -278,7 +278,7 @@ void XML_handler::parse_new_file(char *archivo) {
         ss <<doc;
         std::string result_xml = ss.str();
         std::cout<<result_xml<<std::endl;
-        Factory::Cancion2(filename,Album,artista,letra);
+        Factory::Cancion2(filename,Album,artista,letra,"");
         Holder::odisea->send2(result_xml);
 
     }catch (exception){
