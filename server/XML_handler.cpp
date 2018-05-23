@@ -16,6 +16,9 @@
 #include "../data/Factory.h"
 #include "../Estructuras/BinarySearch.h"
 #include "../Estructuras/BackTracking.h"
+#include "../Estructuras/RadixSort.h"
+#include "../Estructuras/BubbleSort.h"
+#include "../Estructuras/Quicksort.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -29,10 +32,15 @@ void XML_handler::parse_song_requests(char *archive) {
     QString metodo2 = QString(metodo);
     char* busqueda = root_node->first_attribute("Busqueda")->value();
     string page = root_node->first_attribute("Page")->value();
+    QString orden = root_node->first_attribute("Orden")->value();
+
     int x= stoi(page);
     if(metodo2.contains("Autor")){
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = Cancion::avl->Buscar(busqueda);
+        if(orden.contains("true")){
+            RadixSort::start(lista);
+        }
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
@@ -45,6 +53,9 @@ void XML_handler::parse_song_requests(char *archive) {
         //
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = BinarySearch::start(busqueda);
+        if(orden.contains("true")){
+            BubbleSort::start(lista);
+        }
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
@@ -55,6 +66,9 @@ void XML_handler::parse_song_requests(char *archive) {
     if(metodo2.contains("Nombre")){
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion*>* lista = Cancion::arbolb->Buscar_Nodo(busqueda);
+        if(orden.contains("true")){
+            Quicksort::start(lista);
+        }
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
         ss <<(*documento);
@@ -84,8 +98,6 @@ void XML_handler::parse_song_requests(char *archive) {
             Holder::odisea->send2(result_xml);
             return;
         }
-        std::cout<<"LLEGUE AQUI NO SE 3333333333333333"<<std::endl;
-
         xml_node<>* child = documento->allocate_node(node_element, "Cancion");
         char *letra = documento->allocate_string(cancion->letra->toLatin1().data());
         char* calificacion = documento->allocate_string(std::to_string(cancion->calificacion).c_str());
@@ -106,6 +118,15 @@ void XML_handler::parse_song_requests(char *archive) {
         char* variable =(char*) result_xml.c_str();
         Holder::odisea->send2(result_xml);
 
+    }
+    if(metodo2.contains("Nada")){
+        Lista<Cancion*>* lista = Cancion::Music;
+        xml_document<>* documento = XML_generator::create_Music_list(lista,x);
+        std::stringstream ss;
+        ss <<(*documento);
+        std::string result_xml = ss.str();
+        char* variable =(char*) result_xml.c_str();
+        Holder::odisea->send2(result_xml.c_str());
     }
 
 }
