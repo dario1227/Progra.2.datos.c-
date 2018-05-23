@@ -17,6 +17,33 @@ void Cancion::order(Lista<Cancion *> *music) {
 
     }
 }
+void Cancion::erase(string name, string artist, string album) {
+    Nodo<Cancion*>* temp=Cancion::Music->head;
+    string nombre=temp->value->nombre;
+    string artista= temp->value->artista;
+    string album2= temp->value->album;
+    if(nombre==name && artista==artist && album2==album){
+        Cancion::Music->head=temp->next;
+        Cancion::Music->head->prev= nullptr;
+        Cancion::Music->length--;
+    }
+    else {
+        while (temp->next != nullptr) {
+            string nombre=temp->next->value->nombre;
+            string artista= temp->next->value->artista;
+            string album2= temp->next->value->album;
+            if(nombre==name && artista==artist && album2==album){
+                temp->next=temp->next->next;
+                if(temp->next->next!= nullptr){
+                    temp->next->next->prev=temp;
+                }
+                Cancion::Music->length--;
+                break;
+            }
+            temp=temp->next;
+        }
+    }
+}
 Cancion::Cancion() {
     this->nombre= nullptr;
     this->album= nullptr;
