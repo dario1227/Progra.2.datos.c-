@@ -33,10 +33,10 @@ void Cancion::erase(string name, string artist, string album) {
             string artista= temp->next->value->artista;
             string album2= temp->next->value->album;
             if(nombre==name && artista==artist && album2==album){
-                temp->next=temp->next->next;
                 if(temp->next->next!= nullptr){
                     temp->next->next->prev=temp;
                 }
+                temp->next=temp->next->next;
                 Cancion::Music->length--;
                 break;
             }

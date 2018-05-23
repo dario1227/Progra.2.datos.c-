@@ -9,6 +9,8 @@
 #include "../Estructuras/Lista.h"
 #include "json-c/json_object.h"
 #include "../Estructuras/HashMap.h"
+#include "frien.h"
+
 using  namespace std;
 class HashMap;
 class User {
@@ -25,6 +27,7 @@ public:
     string favorites[10];
     json_object*compas;
     static Lista<User*>*Users;
+    Lista<frien*>* getFriends();
 
 };
 
