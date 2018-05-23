@@ -56,6 +56,7 @@ Cancion::Cancion() {
     Cancion::avl->Insertar(num);
     num++;
 }
+//
 Cancion::Cancion(string nombre, string album, string artista, string letra) {
     std::cout<<"Llegue a esto"<<std::endl;
     this->nombre= nombre;
