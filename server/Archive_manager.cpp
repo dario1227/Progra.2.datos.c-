@@ -76,9 +76,14 @@ const char *Archive_manager::return_archive2(char *filename, int chunk) {
     *filesize = lSize;
     result = fread (buffer,1,lSize,iFile);
     char* pedazo = Archive_manager::divide_chunk2(buffer,chunksize,chunksize*chunk,chunksize*chunk+chunksize);
-    std::string* parseado = new std::string(base64::base64_encode(reinterpret_cast<const unsigned char *>(buffer), lSize).c_str());
-    //std::cout<<"ME DIOO ESTO"<<parseado<<std::endl;
-            delete[] pedazo;
+    std::cout<< sizeof(pedazo)<<std::endl;
+    std::string* parseado = new std::string(base64::base64_encode(reinterpret_cast<const unsigned char *>(pedazo), chunksize).c_str());
+    std::cout<<"ME DIOO ESTO"<<chunksize<<std::endl;
+
+
+         //   delete[] pedazo;
+    std::cout<<*parseado<<std::endl;
+
     return const_cast<char *>(parseado->c_str());}
 
 char *Archive_manager::divide_chunk2(char *archive, long chunksize, long i, long i1) {

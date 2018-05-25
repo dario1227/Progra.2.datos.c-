@@ -258,7 +258,7 @@ void XML_handler::parse_chunk2(char *archivo) {
     std::stringstream ss;
     ss <<doc;
     std::string result_xml = ss.str();
-    std::cout<<result_xml<<std::endl;
+   // std::cout<<result_xml<<std::endl;
     Holder::odisea->send2(result_xml);
 
 }
