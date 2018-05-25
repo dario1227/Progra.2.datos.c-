@@ -7,7 +7,8 @@
 #include <iostream>
 #include "Archive_manager.h"
 #include "../data/base64.h"
-
+using namespace std;
+long* Archive_manager::filesize = (long*)malloc(sizeof(long));
 char* Archive_manager::return_archive(char *filename, int chunk) {
     std::cout<<filename<<std::endl;
 
@@ -72,7 +73,7 @@ const char *Archive_manager::return_archive2(char *filename, int chunk) {
     buffer = (char*) malloc (sizeof(char)*lSize);
     if (buffer == NULL) {fputs ("Memory error",stderr); }
     long chunksize = lSize*0.02;
-
+    *filesize = lSize;
     result = fread (buffer,1,lSize,iFile);
     char* pedazo = Archive_manager::divide_chunk2(buffer,chunksize,chunksize*chunk,chunksize*chunk+chunksize);
     std::string* parseado = new std::string(base64::base64_encode(reinterpret_cast<const unsigned char *>(buffer), lSize).c_str());

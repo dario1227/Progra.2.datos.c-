@@ -232,23 +232,28 @@ void XML_handler::primary_handler(char *archivo) {
         return;
     }
     if(operacion=="Chunk"){
-        parse_chunk((char*)to_return.str().c_str());
+        parse_chunk2((char*)to_return.str().c_str());
         return;
     }
 
     return;
 }
+
 void XML_handler::parse_chunk2(char *archivo) {
     xml_document<> doc;
     doc.parse<0>(archivo);
     xml_node<> *root_node = doc.first_node("Root");
     char* num = root_node->first_attribute("Chunk")->value();
     string str = string(num);
+
     int chunk = stoi(num);
     char* name = root_node->first_attribute("Filename")->value();
     char* archive = doc.allocate_string(Archive_manager::return_archive2(name,chunk));
     //  xml_node<>* child = doc.allocate_node(node_element, "Archive");
     root_node->append_attribute(doc.allocate_attribute("Data",archive));
+    string cosas2 =  to_string((*Archive_manager::filesize));
+    char* cosas  = doc.allocate_string(cosas2.c_str());
+    root_node->append_attribute(doc.allocate_attribute("Filesize",cosas));
     //  root_node->append_node(child);
     std::stringstream ss;
     ss <<doc;
