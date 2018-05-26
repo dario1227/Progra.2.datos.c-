@@ -89,8 +89,10 @@ const char *Archive_manager::return_archive2(char *filename, int chunk) {
 char *Archive_manager::divide_chunk2(char *archive, long chunksize, long i, long i1) {
     char* buffer = new char[chunksize];
     int x =i;
+    int y = 0;
     while(x<i1){
-        buffer[x]=archive[x];
+        buffer[y]=archive[x];
+        y++;
         x++;
     }
     return buffer;
