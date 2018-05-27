@@ -90,7 +90,8 @@ int main(int argc, char **argv) {
    // JsonFactory::save();
   //  cout<<BinarySearch::start("Lateralus")->length;
    // Cancion::erase("dario","dios","album");
-   // print(Cancion::Music);
+    print(Cancion::Music);
+    cout<<BinarySearch::search("Vicarious", "Tool")->album;
    Holder::odisea = new OdysseyServer();
     Holder::odisea->start();
     //cout<<user1->getFriends()->head->next->value->ID;

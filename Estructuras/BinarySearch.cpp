@@ -63,6 +63,17 @@ Cancion* aux(string value)
     // value not present
     return nullptr;
 }
+Cancion* BinarySearch::search(string name, string artist) {
+    Nodo<Cancion*> *temp= Cancion::Music->head;
+    while (temp!= nullptr){
+        if(temp->value->nombre==name && temp->value->artista==artist){
+            return temp->value;
+        }
+        temp=temp->next;
+    }
+    return nullptr;
+
+}
 Lista<Cancion*>* BinarySearch::start(string album){
     BubbleSort::start(Cancion::Music);
     Cancion* find=aux(album);
