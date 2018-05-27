@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sstream>
+#include <QtCore/QString>
 
 using namespace std;
 void OdysseyServer::start() {
@@ -53,7 +54,7 @@ void OdysseyServer::start() {
 
 
     /*ACCEPT*/
-    do {
+
 
         mysock = accept(sock, (struct sockaddr *) 0, 0);
         if (mysock == -1) {
@@ -76,11 +77,13 @@ void OdysseyServer::start() {
             usleep(1);
             memset(buff, 0, 7000000);
             receiveFile();
+
+            return;
             send2("FAFAFAFAF");
             std::cout<<"Algun buffer"<<buff<<std::endl;
         }
 
-    } while (1);
+
 }
 void OdysseyServer::send2(string to_send) {
     to_send.append("#");
@@ -104,6 +107,10 @@ void OdysseyServer::receiveFile() {
         ioctl(mysock,FIONREAD,&x);
         std::cout<<x<<std::endl;
        // std::cout<<*to_return<<std::endl;
+        if( QString(to_return.str().c_str())=="Salir"){
+            close(mysock);
+            return;
+        }
         if(isXML((char*)to_return.str().c_str())){
             XML_handler::primary_handler((char*)to_return.str().c_str());
             return receiveFile();
