@@ -9,12 +9,12 @@
 #include "Node.h"
 
 class Binary_search_tree {
-Node* root = nullptr;
+    Node *root = nullptr;
 public:
-User* search(string name);
+    User *search(string name);
 
 
-    void insertar(string str, User* usuario);
+    void insertar(string str, User *usuario);
 
     User *search2(string name);
 };

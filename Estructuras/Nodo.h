@@ -5,16 +5,16 @@
 #ifndef PROGRA_2_DATOS_C_NODO_H
 #define PROGRA_2_DATOS_C_NODO_H
 
-template <typename T>
+template<typename T>
 class Nodo {
 public:
-    Nodo<T>(){
-        this->next= nullptr;
-        this->prev= nullptr;
+    Nodo<T>() {
+        this->next = nullptr;
+        this->prev = nullptr;
     };
     T value;
-    Nodo* next;
-    Nodo* prev;
+    Nodo *next;
+    Nodo *prev;
 
 
 };

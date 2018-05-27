@@ -3,4 +3,5 @@
 //
 
 #include "Holder.h"
-OdysseyServer* Holder::odisea = nullptr;
+
+OdysseyServer *Holder::odisea = nullptr;

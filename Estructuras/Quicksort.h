@@ -11,7 +11,7 @@
 
 class Quicksort {
 public:
-    static void start(Lista<Cancion*> *Lista);
+    static void start(Lista<Cancion *> *Lista);
 
 };
 

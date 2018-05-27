@@ -8,16 +8,22 @@
 #include "HashEntry.h"
 
 const int TABLE_SIZE = 128;
+
 class HashEntry;
+
 class User;
+
 class HashMap {
 private:
     HashEntry **table;
 public:
     HashMap();
+
     int HashFunc(int key);
-    void Insert(int key, User* value);
-    User* Search(int key);
+
+    void Insert(int key, User *value);
+
+    User *Search(int key);
 };
 
 

@@ -9,9 +9,10 @@
 #include "../data/Cancion.h"
 #include "Lista.h"
 #include "QString"
+
 class BackTracking {
 public:
-    static Cancion* start(Lista<Cancion*>*Music,string frase);
+    static Cancion *start(Lista<Cancion *> *Music, string frase);
 };
 
 

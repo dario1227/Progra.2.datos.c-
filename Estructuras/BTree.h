@@ -13,20 +13,21 @@ class BTree {
     BTreeNode *root; // Pointer to root node
     int t;  // Minimum degree
 public:
-    BTree(int _t)
-    {
+    BTree(int _t) {
         root = nullptr;
         t = _t;
     }
-    void traverse()
-    {
+
+    void traverse() {
         if (root != nullptr) root->traverse();
     }
-    BTreeNode* search(int k)
-    {
-        return (root == nullptr)? nullptr : root->search(k);
+
+    BTreeNode *search(int k) {
+        return (root == nullptr) ? nullptr : root->search(k);
     }
+
     void insert(int k);
+
     void remove(int k);
 };
 

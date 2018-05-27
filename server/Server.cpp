@@ -18,6 +18,7 @@
 #include "exception"
 #include <iostream>
 #include "Server.h"
+
 void Server::initialize_connection() {
     int client;
     int portNum = 1500;
@@ -27,8 +28,7 @@ void Server::initialize_connection() {
     struct sockaddr_in server_addr;
     socklen_t size;
     client = socket(AF_INET, SOCK_STREAM, 0);
-    if (client < 0)
-    {
+    if (client < 0) {
         std::cout << "\nError establishing socket..." << std::endl;
         exit(1);
     }
@@ -36,21 +36,19 @@ void Server::initialize_connection() {
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htons(INADDR_ANY);
     server_addr.sin_port = htons(portNum);
-    if ((bind(client, (struct sockaddr*)&server_addr,sizeof(server_addr))) < 0)
-    {
+    if ((bind(client, (struct sockaddr *) &server_addr, sizeof(server_addr))) < 0) {
         std::cout << "=> Error binding connection, the socket has already been established..." << std::endl;
-        return ;
+        return;
     }
     size = sizeof(server_addr);
     std::cout << "=> Looking for clients..." << std::endl;
     listen(client, 1);
     int clientCount = 1;
-    server = accept(client,(struct sockaddr *)&server_addr,&size);
+    server = accept(client, (struct sockaddr *) &server_addr, &size);
     if (server < 0)
         std::cout << "=> Error on accepting..." << std::endl;
     int counter = 0;
-    while (server > 0)
-    {
+    while (server > 0) {
         counter++;
         try {
             if (counter == 0) {
@@ -67,7 +65,7 @@ void Server::initialize_connection() {
             }
 
 
-        }catch(std::exception e){
+        } catch (std::exception e) {
             return;
         }
 

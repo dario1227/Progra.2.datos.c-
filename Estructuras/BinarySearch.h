@@ -7,10 +7,12 @@
 
 
 #include "../data/Cancion.h"
+
 class BinarySearch {
 public:
-    static Lista<Cancion*>*start(string album);
-    static Cancion* search(string name, string artist);
+    static Lista<Cancion *> *start(string album);
+
+    static Cancion *search(string name, string artist);
 
 };
 

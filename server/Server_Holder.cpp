@@ -6,6 +6,7 @@
 #include "../data/JsonFactory.h"
 
 OdysseyServer *Server_Holder::servidor = nullptr;
+
 void Server_Holder::start() {
     JsonFactory::read();
     servidor = new OdysseyServer;

@@ -10,7 +10,7 @@
 
 class Holder {
 public:
-static OdysseyServer* odisea;
+    static OdysseyServer *odisea;
 };
 
 

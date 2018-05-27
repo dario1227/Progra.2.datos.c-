@@ -7,62 +7,67 @@
 #include "Data_Holder.h"
 
 static int counter = 0;
-HashMap *User::UserHash=new HashMap();
-Lista<User*>*User::Users=new Lista<User*>();
+HashMap *User::UserHash = new HashMap();
+Lista<User *> *User::Users = new Lista<User *>();
+
 void User::addFriend(json_object *compa) {
-    json_object_array_add(this->compas,compa);
+    json_object_array_add(this->compas, compa);
 }
-string chop2(string data){
-    string name=data;
-    name.resize(name.length()-1);
+
+string chop2(string data) {
+    string name = data;
+    name.resize(name.length() - 1);
     std::reverse(name.begin(), name.end());
-    name.resize(name.length()-1);
+    name.resize(name.length() - 1);
     std::reverse(name.begin(), name.end());
     return name;
 
 }
-Lista<frien*>* User::getFriends() {
-    Lista<frien*>* result=new Lista<frien*>();
-    int y=0;
-    while(y!=json_object_array_length(this->compas)) {
-        json_object*Frien=json_object_array_get_idx(this->compas,y);
-        string ID=json_object_to_json_string(json_object_object_get(Frien,"ID"));
-        string password=json_object_to_json_string(json_object_object_get(Frien,"password"));
-        string name=json_object_to_json_string(json_object_object_get(Frien,"name"));
-        string age=json_object_to_json_string(json_object_object_get(Frien,"age"));
-        string favorites=json_object_to_json_string(json_object_object_get(Frien,"favorites"));
-        frien*dato=new frien();
-        dato->password=chop2(password);
-        dato->favorites=chop2(favorites);
-        dato->age=chop2(age);
-        dato->name=chop2(name);
-        dato->ID=chop2(ID);
+
+Lista<frien *> *User::getFriends() {
+    Lista<frien *> *result = new Lista<frien *>();
+    int y = 0;
+    while (y != json_object_array_length(this->compas)) {
+        json_object *Frien = json_object_array_get_idx(this->compas, y);
+        string ID = json_object_to_json_string(json_object_object_get(Frien, "ID"));
+        string password = json_object_to_json_string(json_object_object_get(Frien, "password"));
+        string name = json_object_to_json_string(json_object_object_get(Frien, "name"));
+        string age = json_object_to_json_string(json_object_object_get(Frien, "age"));
+        string favorites = json_object_to_json_string(json_object_object_get(Frien, "favorites"));
+        frien *dato = new frien();
+        dato->password = chop2(password);
+        dato->favorites = chop2(favorites);
+        dato->age = chop2(age);
+        dato->name = chop2(name);
+        dato->ID = chop2(ID);
         result->add(dato);
         y++;
     }
     return result;
 
 }
-User::User(string name, string age, string ID, string password){
-this->compas=json_object_new_array();
-this->password=password;
-this->name=name;
-this->ID=ID;
-this->age=age;
+
+User::User(string name, string age, string ID, string password) {
+    this->compas = json_object_new_array();
+    this->password = password;
+    this->name = name;
+    this->ID = ID;
+    this->age = age;
     this->num = counter;
     UserHash->Insert(counter, this);
     User::Users->add(this);
     counter++;
-    Data_Holder::users->insertar(name,this);
+    Data_Holder::users->insertar(name, this);
 
 
 }
-User::User(){
-    this->age= "";
-    this->ID= "";
-    this->name= "";
-    this->password= "";
-    this->compas=json_object_new_array();
+
+User::User() {
+    this->age = "";
+    this->ID = "";
+    this->name = "";
+    this->password = "";
+    this->compas = json_object_new_array();
     this->num = counter;
     UserHash->Insert(counter, this);
     User::Users->add(this);

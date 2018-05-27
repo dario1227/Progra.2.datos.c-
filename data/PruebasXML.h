@@ -9,7 +9,9 @@
 class PruebasXML {
 public:
     static void prueba();
+
     static void prueba2();
+
     static void divide_audio();
 };
 
