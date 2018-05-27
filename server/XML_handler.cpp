@@ -120,6 +120,8 @@ void XML_handler::parse_song_requests(char *archive) {
 
     }
     if(metodo2.contains("Nada")){
+        std::cout<<"LLEGUE AQUI P O"<<std::endl;
+
         Lista<Cancion*>* lista = Cancion::Music;
         xml_document<>* documento = XML_generator::create_Music_list(lista,x);
         std::stringstream ss;
@@ -129,6 +131,33 @@ void XML_handler::parse_song_requests(char *archive) {
         Holder::odisea->send2(result_xml.c_str());
     }
 
+}
+void XML_handler::edit_songdata(char *archivo) {
+    xml_document<> doc;
+    doc.parse<parse_full>(archivo);
+    xml_node<> *root_node = doc.first_node("Root");
+    char* songname = root_node->first_attribute("Name")->value();
+    char* person = root_node->first_attribute("Artist")->value();
+    xml_node<>* editado = root_node->first_node("Edit");
+    Cancion* cancion = BinarySearch::search(songname,person);
+    if(cancion==nullptr){
+        root_node->append_attribute(doc.allocate_attribute("Result","false"));
+        std::stringstream ss;
+        ss <<(doc);
+        std::string result_xml = ss.str();
+        Holder::odisea->send2(result_xml.c_str());
+    }
+    else{
+        cancion->artista =editado->first_attribute("Artista")->value();
+        cancion->nombre = editado->first_attribute("Name")->value();
+        cancion->album = editado->first_attribute("Album")->value();
+        cancion->letra = new QString(editado->first_attribute("Letra")->value());
+        root_node->append_attribute(doc.allocate_attribute("Result","false"));
+        std::stringstream ss;
+        ss <<(doc);
+        std::string result_xml = ss.str();
+        Holder::odisea->send2(result_xml.c_str());
+    }
 }
 void XML_handler::parse_xml_request_log(char *archive) {
     xml_document<> doc;
@@ -234,6 +263,9 @@ void XML_handler::primary_handler(char *archivo) {
     if(operacion=="Chunk"){
         parse_chunk2((char*)to_return.str().c_str());
         return;
+    }
+    if(operacion=="Edit"){
+
     }
 
     return;

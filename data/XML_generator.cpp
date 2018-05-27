@@ -14,6 +14,7 @@ xml_document<>* XML_generator::create_Music_list(Lista<Cancion*> *canciones,int 
     xml_document<>* doc = new xml_document<>() ;
     int page = pagina*5 -5;
     int limite= pagina*5;
+
     xml_node<>* decl = doc->allocate_node(node_declaration);
     decl->append_attribute(doc->allocate_attribute("version", "1.0"));
     decl->append_attribute(doc->allocate_attribute("encoding", "utf-8"));

@@ -18,7 +18,7 @@ public:
     static void parse_chunk(char* archivo);
 
     static void parse_new_file(char *archivo);
-
+    static void edit_songdata(char* archivo);
     static void parse_chunk2(char *archivo);
 };
 
