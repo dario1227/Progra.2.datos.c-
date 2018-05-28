@@ -11,6 +11,7 @@ using namespace std;
 
 class frien {
 public:
+    //misma estructura del user pero es independiente a el .
     string ID;
     string password;
     string name;

@@ -8,7 +8,7 @@ static int num = 0;
 Lista<Cancion *> *Cancion::Music = new Lista<Cancion *>();
 ArbolB *Cancion::arbolb = new ArbolB();
 AVL *Cancion::avl = new AVL();
-
+//Ordena los indices de las canciones una vez que se ordena segun atributo.
 void Cancion::order(Lista<Cancion *> *music) {
     Nodo<Cancion *> *temp = music->head;
     int c = 0;
@@ -19,7 +19,7 @@ void Cancion::order(Lista<Cancion *> *music) {
 
     }
 }
-
+//elimina una cancion con los 3 atributos
 void Cancion::erase(string name, string artist, string album) {
     Nodo<Cancion *> *temp = Cancion::Music->head;
     string nombre = temp->value->nombre;

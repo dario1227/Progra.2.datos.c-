@@ -6,7 +6,7 @@
 #include <zconf.h>
 #include <pwd.h>
 #include "JsonFactory.h"
-
+//quita las comillas que retornan las funciones de jsonc
 string chop(string data) {
     string name = data;
     name.resize(name.length() - 1);
@@ -51,7 +51,7 @@ void readaux(string data) {
     }
 
 }
-
+// lee los archivos Json y carga al server los datos
 void JsonFactory::read() {
     int x = 0;
     string data;
@@ -96,7 +96,7 @@ void saveaux(string data) {
     myfile.close();
 
 }
-
+//guarda las canciones en memoria al archivos de Json
 void JsonFactory::save() {
     int x = 0;
     string data;
@@ -107,7 +107,7 @@ void JsonFactory::save() {
         data = "Usuarios";
     }
 }
-
+//crea un archivo Json para una cancion
 json_object *JsonFactory::makeSong(Cancion *song) {
     json_object *objeto = json_object_new_object();
     json_object *toAdd = json_object_new_string(song->nombre.c_str());
@@ -124,7 +124,7 @@ json_object *JsonFactory::makeSong(Cancion *song) {
     json_object_object_add(objeto, "stars", toAdd);;
     return objeto;
 }
-
+//crea el Json para un user
 json_object *JsonFactory::makeUser(User *usuario) {
     json_object *objeto = json_object_new_object();
     json_object *toAdd = json_object_new_string(usuario->ID.c_str());

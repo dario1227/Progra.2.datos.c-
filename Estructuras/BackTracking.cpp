@@ -7,6 +7,7 @@
 #include <QtGui/QTextDocument>
 #include <QtWidgets/QPlainTextEdit>
 #include "BackTracking.h"
+//separa la frase en palabras
 
 static Lista<QString> *separate(QString *frase) {
     Lista<QString> *words = new Lista<QString>();
@@ -25,7 +26,7 @@ static Lista<QString> *separate(QString *frase) {
     words->add(word);
     return words;
 }
-
+//inicia el backtracking
 Cancion *BackTracking::start(Lista<Cancion *> *Music, string frase) {
     Lista<QString> *words = separate(new QString(frase.c_str()));
     Nodo<Cancion *> *temp = Music->head;

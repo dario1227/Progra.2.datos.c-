@@ -56,7 +56,7 @@ Cancion *aux(string value) {
     // value not present
     return nullptr;
 }
-
+//busca una cancion con esos dos atributos
 Cancion *BinarySearch::search(string name, string artist) {
     Nodo<Cancion *> *temp = Cancion::Music->head;
     while (temp != nullptr) {

@@ -12,6 +12,7 @@ Lista<User*>*User::Users=new Lista<User*>();
 void User::addFriend(json_object *compa) {
     json_object_array_add(this->compas,compa);
 }
+//verifica un amigo en la lista
 bool User::contains(User *amigo) {
     Lista<frien*>*lista=this->getFriends();
     Nodo<frien*>*temp= lista->head;
@@ -35,6 +36,7 @@ string chop2(string data){
     return name;
 
 }
+//obtiene la lista de amigos como objeto
 Lista<frien*>* User::getFriends() {
     Lista<frien*>* result=new Lista<frien*>();
     int y=0;
