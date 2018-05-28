@@ -9,7 +9,8 @@
 class Server {
 public:
     int server;
- void initialize_connection();
+
+    void initialize_connection();
 };
 
 

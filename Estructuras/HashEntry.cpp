@@ -3,8 +3,8 @@
 //
 
 #include "HashEntry.h"
-HashEntry::HashEntry(int key, User* value)
-{
+
+HashEntry::HashEntry(int key, User *value) {
     this->key = key;
     this->value = value;
 }

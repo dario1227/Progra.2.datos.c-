@@ -9,12 +9,15 @@
 #include "../data/User.h"
 
 using namespace std;
+
 class User;
+
 class HashEntry {
 public:
-    HashEntry(int key, User* user);
+    HashEntry(int key, User *user);
+
     int key;
-    User* value;
+    User *value;
 };
 
 

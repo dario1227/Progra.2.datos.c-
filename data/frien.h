@@ -6,14 +6,16 @@
 #define PROGRA_2_DATOS_C_FRIEND_H
 
 #include <iostream>
+
 using namespace std;
-class frien{
+
+class frien {
 public:
-string ID;
-string password;
-string name;
-string age;
-string favorites;
+    string ID;
+    string password;
+    string name;
+    string age;
+    string favorites;
 
 };
 

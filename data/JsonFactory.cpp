@@ -6,36 +6,44 @@
 #include <zconf.h>
 #include <pwd.h>
 #include "JsonFactory.h"
-string chop(string data){
-    string name=data;
-    name.resize(name.length()-1);
+
+string chop(string data) {
+    string name = data;
+    name.resize(name.length() - 1);
     std::reverse(name.begin(), name.end());
-    name.resize(name.length()-1);
+    name.resize(name.length() - 1);
     std::reverse(name.begin(), name.end());
     return name;
 
 }
-void readaux(string data){
+
+void readaux(string data) {
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
-    string name=homedir;
+    string name = homedir;
     ofstream myfile;
-    string da=name+"/Jsons"+"/"+data+".json";
-    json_object* datos=json_object_from_file(da.c_str());
-    int y=0;
-    int z=json_object_array_length(datos);
-    if(data=="Canciones"){
-        while(y!=z){
-            json_object* temp=json_object_array_get_idx(datos,y);
-            new Cancion(chop(json_object_to_json_string(json_object_object_get(temp,"name"))),chop(json_object_to_json_string(json_object_object_get(temp,"album"))),chop(json_object_to_json_string(json_object_object_get(temp,"artist"))),chop(json_object_to_json_string(json_object_object_get(temp,"lyrics"))),chop(json_object_to_json_string(json_object_object_get(temp,"genero"))));
+    string da = name + "/Jsons" + "/" + data + ".json";
+    json_object *datos = json_object_from_file(da.c_str());
+    int y = 0;
+    int z = json_object_array_length(datos);
+    if (data == "Canciones") {
+        while (y != z) {
+            json_object *temp = json_object_array_get_idx(datos, y);
+            new Cancion(chop(json_object_to_json_string(json_object_object_get(temp, "name"))),
+                        chop(json_object_to_json_string(json_object_object_get(temp, "album"))),
+                        chop(json_object_to_json_string(json_object_object_get(temp, "artist"))),
+                        chop(json_object_to_json_string(json_object_object_get(temp, "lyrics"))),
+                        chop(json_object_to_json_string(json_object_object_get(temp, "genero"))));
             y++;
 
         }
-    }
-    else{
-        while(y!=z){
-            json_object* temp=json_object_array_get_idx(datos,y);
-            new User(chop(json_object_to_json_string(json_object_object_get(temp,"name"))),chop(json_object_to_json_string(json_object_object_get(temp,"age"))),chop(json_object_to_json_string(json_object_object_get(temp,"ID"))),chop(json_object_to_json_string(json_object_object_get(temp,"password"))));
+    } else {
+        while (y != z) {
+            json_object *temp = json_object_array_get_idx(datos, y);
+            new User(chop(json_object_to_json_string(json_object_object_get(temp, "name"))),
+                     chop(json_object_to_json_string(json_object_object_get(temp, "age"))),
+                     chop(json_object_to_json_string(json_object_object_get(temp, "ID"))),
+                     chop(json_object_to_json_string(json_object_object_get(temp, "password"))));
             y++;
 
         }
@@ -43,43 +51,44 @@ void readaux(string data){
     }
 
 }
+
 void JsonFactory::read() {
-    int x=0;
+    int x = 0;
     string data;
-    data="Canciones";
-    while (x<2){
+    data = "Canciones";
+    while (x < 2) {
         readaux(data);
         x++;
-        data="Usuarios";
+        data = "Usuarios";
     }
 
 }
-void saveaux(string data){
+
+void saveaux(string data) {
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
-    string name=homedir;
+    string name = homedir;
     ofstream myfile;
-    string da=name+"/Jsons"+"/"+data+".json";
-    myfile.open (da.c_str());
-    json_object* array=json_object_new_array();
-    if(data=="Canciones") {
+    string da = name + "/Jsons" + "/" + data + ".json";
+    myfile.open(da.c_str());
+    json_object *array = json_object_new_array();
+    if (data == "Canciones") {
         Nodo<Cancion *> *temp = Cancion::Music->head;
-        while(temp!= nullptr) {
-            json_object_array_add(array,JsonFactory::makeSong(temp->value));
-            temp=temp->next;
+        while (temp != nullptr) {
+            json_object_array_add(array, JsonFactory::makeSong(temp->value));
+            temp = temp->next;
         }
-        json_object_to_file_ext((char*)da.c_str(), array, 0777);
+        json_object_to_file_ext((char *) da.c_str(), array, 0777);
 
-    }
-    else{
-        Nodo<User *> *temp=User::Users->head;
-       temp = User::Users->head;
-        while(temp!= nullptr) {
-            json_object_array_add(array,JsonFactory::makeUser(temp->value));
+    } else {
+        Nodo<User *> *temp = User::Users->head;
+        temp = User::Users->head;
+        while (temp != nullptr) {
+            json_object_array_add(array, JsonFactory::makeUser(temp->value));
 
-            temp=temp->next;
+            temp = temp->next;
         }
-        json_object_to_file_ext((char*)da.c_str(), array, 0777);
+        json_object_to_file_ext((char *) da.c_str(), array, 0777);
 
     }
 
@@ -87,44 +96,47 @@ void saveaux(string data){
     myfile.close();
 
 }
+
 void JsonFactory::save() {
-    int x=0;
+    int x = 0;
     string data;
-    data="Canciones";
-    while (x<2){
+    data = "Canciones";
+    while (x < 2) {
         saveaux(data);
         x++;
-        data="Usuarios";
+        data = "Usuarios";
     }
 }
-json_object* JsonFactory::makeSong(Cancion *song) {
-    json_object* objeto=json_object_new_object();
-    json_object* toAdd = json_object_new_string(song->nombre.c_str());
-    json_object_object_add(objeto,"name",toAdd);
+
+json_object *JsonFactory::makeSong(Cancion *song) {
+    json_object *objeto = json_object_new_object();
+    json_object *toAdd = json_object_new_string(song->nombre.c_str());
+    json_object_object_add(objeto, "name", toAdd);
     toAdd = json_object_new_string(song->artista.c_str());
-    json_object_object_add(objeto,"artist",toAdd);
+    json_object_object_add(objeto, "artist", toAdd);
     toAdd = json_object_new_string(song->album.c_str());
-    json_object_object_add(objeto,"genero",toAdd);
+    json_object_object_add(objeto, "genero", toAdd);
     toAdd = json_object_new_string(song->genero.c_str());
-    json_object_object_add(objeto,"album",toAdd);
+    json_object_object_add(objeto, "album", toAdd);
     toAdd = json_object_new_string(song->letra->toStdString().c_str());
-    json_object_object_add(objeto,"lyrics",toAdd);
+    json_object_object_add(objeto, "lyrics", toAdd);
     toAdd = json_object_new_string(to_string(song->calificacion).c_str());
-    json_object_object_add(objeto,"stars",toAdd);;
+    json_object_object_add(objeto, "stars", toAdd);;
     return objeto;
 }
-json_object* JsonFactory::makeUser(User *usuario) {
-    json_object* objeto=json_object_new_object();
-    json_object* toAdd = json_object_new_string(usuario->ID.c_str());
-    json_object_object_add(objeto,"ID",toAdd);
+
+json_object *JsonFactory::makeUser(User *usuario) {
+    json_object *objeto = json_object_new_object();
+    json_object *toAdd = json_object_new_string(usuario->ID.c_str());
+    json_object_object_add(objeto, "ID", toAdd);
     toAdd = json_object_new_string(usuario->password.c_str());
-    json_object_object_add(objeto,"password",toAdd);
+    json_object_object_add(objeto, "password", toAdd);
     toAdd = json_object_new_string(usuario->name.c_str());
-    json_object_object_add(objeto,"name",toAdd);
-     toAdd = json_object_new_string(usuario->age.c_str());
-    json_object_object_add(objeto,"age",toAdd);
+    json_object_object_add(objeto, "name", toAdd);
+    toAdd = json_object_new_string(usuario->age.c_str());
+    json_object_object_add(objeto, "age", toAdd);
     toAdd = json_object_new_string(usuario->favorites->c_str());
-    json_object_object_add(objeto,"favorites",toAdd);
-    json_object_object_add(objeto,"Friends",usuario->compas);
+    json_object_object_add(objeto, "favorites", toAdd);
+    json_object_object_add(objeto, "Friends", usuario->compas);
     return objeto;
 }

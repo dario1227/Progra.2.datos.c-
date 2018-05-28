@@ -11,7 +11,7 @@
 
 class BubbleSort {
 public:
-    static void start(Lista<Cancion*> *lista);
+    static void start(Lista<Cancion *> *lista);
 
 };
 

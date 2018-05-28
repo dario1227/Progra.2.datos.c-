@@ -8,12 +8,16 @@
 
 #include "../data/Cancion.h"
 #include <iostream>
+
 class Cancion;
+
 using namespace std;
+
 class ArbolB {
 public:
     void Insertar_Nodo(int clave);
-    Lista<Cancion*> *Buscar_Nodo(string x);
+
+    Lista<Cancion *> *Buscar_Nodo(string x);
 
 };
 

@@ -10,7 +10,7 @@
 
 class Server_Holder {
 public:
-static OdysseyServer *servidor;
+    static OdysseyServer *servidor;
 public:
     static void start();
 };

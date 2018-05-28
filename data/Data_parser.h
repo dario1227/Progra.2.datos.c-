@@ -11,7 +11,8 @@
 class Data_parser {
 public:
     static void read_users();
-    static void append_user(json_object* object);
+
+    static void append_user(json_object *object);
 
 
 };

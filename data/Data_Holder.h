@@ -11,7 +11,7 @@
 
 class Data_Holder {
 public:
-    static Binary_search_tree* users ;
+    static Binary_search_tree *users;
 };
 
 

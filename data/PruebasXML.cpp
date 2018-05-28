@@ -17,19 +17,19 @@ void PruebasXML::prueba() {
 
     xml_document<> doc;
 // xml declaration
-    xml_node<>* decl = doc.allocate_node(node_declaration);
+    xml_node<> *decl = doc.allocate_node(node_declaration);
     decl->append_attribute(doc.allocate_attribute("version", "1.0"));
     decl->append_attribute(doc.allocate_attribute("encoding", "utf-8"));
     doc.append_node(decl);
 
 // root node
-    xml_node<>* root = doc.allocate_node(node_element, "rootnode");
+    xml_node<> *root = doc.allocate_node(node_element, "rootnode");
     root->append_attribute(doc.allocate_attribute("version", "1.0"));
     root->append_attribute(doc.allocate_attribute("type", "example"));
     doc.append_node(root);
 
 // child node
-    xml_node<>* child = doc.allocate_node(node_element, "childnode");
+    xml_node<> *child = doc.allocate_node(node_element, "childnode");
     root->append_node(child);
 
     std::string xml_as_string;
@@ -41,18 +41,20 @@ void PruebasXML::prueba() {
     std::string xml_no_indent;
 // print_no_indenting is the only flag that print() knows about
     std::stringstream ss;
-    ss <<doc;
+    ss << doc;
     std::string result_xml = ss.str();
-    std::cout <<result_xml<<std::endl;
+    std::cout << result_xml << std::endl;
 }
+
 using namespace std;
 using namespace rapidxml;
+
 void PruebasXML::prueba2() {
     cout << "Parsing my beer journal..." << endl;
     xml_document<> doc;
-    xml_node<> * root_node;
+    xml_node<> *root_node;
     // Read the xml file into a vector
-    ifstream theFile ("/home/kenneth/CLionProjects/Progra.2.datos.c-/data/LOL.xml");
+    ifstream theFile("/home/kenneth/CLionProjects/Progra.2.datos.c-/data/LOL.xml");
     vector<char> buffer((istreambuf_iterator<char>(theFile)), istreambuf_iterator<char>());
     buffer.push_back('\0');
     // Parse the buffer using the xml file parsing library into doc
@@ -61,17 +63,17 @@ void PruebasXML::prueba2() {
     root_node = doc.first_node("MyBeerJournal");
     // Iterate over the brewery
     std::stringstream ss;
-    ss <<doc;
+    ss << doc;
     std::string result_xml = ss.str();
-    std::cout <<result_xml<<std::endl;
-    for (xml_node<> * brewery_node = root_node->first_node("Brewery"); brewery_node; brewery_node = brewery_node->next_sibling())
-    {
+    std::cout << result_xml << std::endl;
+    for (xml_node<> *brewery_node = root_node->first_node(
+            "Brewery"); brewery_node; brewery_node = brewery_node->next_sibling()) {
         printf("I have visited %s in %s. ",
                brewery_node->first_attribute("name")->value(),
                brewery_node->first_attribute("location")->value());
         // Interate over the beers
-        for(xml_node<> * beer_node = brewery_node->first_node("Beer"); beer_node; beer_node = beer_node->next_sibling())
-        {
+        for (xml_node<> *beer_node = brewery_node->first_node(
+                "Beer"); beer_node; beer_node = beer_node->next_sibling()) {
             printf("On %s, I tried their %s which is a %s. ",
                    beer_node->first_attribute("dateSampled")->value(),
                    beer_node->first_attribute("name")->value(),
@@ -81,22 +83,23 @@ void PruebasXML::prueba2() {
         cout << endl;
     }
 }
+
 void PruebasXML::divide_audio() {
 //
-    FILE * iFile, * oFile;
+    FILE *iFile, *oFile;
     long lSize;
 //    char * buffer;
 //    size_t result;
 //
-iFile = fopen ( "/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3" , "rb" );
-  if (iFile==NULL) {fputs ("File error",stderr); }
+    iFile = fopen("/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3", "rb");
+    if (iFile == NULL) { fputs("File error", stderr); }
 //
-   oFile = fopen ( "LOLA.mp3" , "wb" );
-    if (oFile==NULL) {fputs ("File error",stderr); }
+    oFile = fopen("LOLA.mp3", "wb");
+    if (oFile == NULL) { fputs("File error", stderr); }
 //
 //
 //    fseek (iFile , 0 , SEEK_END);
-    lSize = ftell (iFile);
+    lSize = ftell(iFile);
 //    rewind (iFile);
 //
 //
@@ -106,7 +109,7 @@ iFile = fopen ( "/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3" , "rb" );
 //
 //    result = fread (buffer,1,lSize,iFile);
 
- //   printf("%d\n",result);
+    //   printf("%d\n",result);
 //___________________#####################################PRUBAXML&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
@@ -121,28 +124,28 @@ iFile = fopen ( "/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3" , "rb" );
     string a;
     a = Archive_manager::return_archive("/home/kenneth/Desktop/Tool - H. w Lyrics (HD).mp3", 0);
     xml_document<> doc;
-    xml_node<>* decl = doc.allocate_node(node_declaration);
+    xml_node<> *decl = doc.allocate_node(node_declaration);
     decl->append_attribute(doc.allocate_attribute("version", "1.0"));
     decl->append_attribute(doc.allocate_attribute("encoding", "utf-8"));
     doc.append_node(decl);
 //
 //// root node
-    xml_node<>* root = doc.allocate_node(node_element, "rootnode");
-    char* archivo = doc.allocate_string(a.c_str());
+    xml_node<> *root = doc.allocate_node(node_element, "rootnode");
+    char *archivo = doc.allocate_string(a.c_str());
     root->append_attribute(doc.allocate_attribute("version", "LOL"));
     root->append_attribute(doc.allocate_attribute("type", "example"));
-    xml_node<>* root2 = doc.allocate_node(node_element,"meme");
-    root2->append_attribute(doc.allocate_attribute("MEME",archivo));
+    xml_node<> *root2 = doc.allocate_node(node_element, "meme");
+    root2->append_attribute(doc.allocate_attribute("MEME", archivo));
 
     root->append_node(root2);
     doc.append_node(root);
     std::stringstream ss;
-    ss <<doc;
+    ss << doc;
     std::string result_xml = ss.str();
-    std::cout <<result_xml<<std::endl;
-   fwrite(ss.str().c_str(), ss.str().size(),1,oFile);
-  // std::cout<<c<<std::endl;
-    fclose (iFile);
-  //  free (buffer);
-  //  printf("%d",lSize);
+    std::cout << result_xml << std::endl;
+    fwrite(ss.str().c_str(), ss.str().size(), 1, oFile);
+    // std::cout<<c<<std::endl;
+    fclose(iFile);
+    //  free (buffer);
+    //  printf("%d",lSize);
 }

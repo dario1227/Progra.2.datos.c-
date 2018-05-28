@@ -12,12 +12,17 @@
 #include "../Estructuras/AVL.h"
 
 using namespace std;
+
 class ArbolB;
+
 class AVL;
+
 class Cancion {
 public:
     Cancion();
-    Cancion(string nombre,string album, string artista, string letra, string genero);
+
+    Cancion(string nombre, string album, string artista, string letra, string genero);
+
     int pos;
     string nombre;
     string album;
@@ -25,10 +30,12 @@ public:
     string genero;
     QString *letra;
     int calificacion;
-    static Lista<Cancion*>*Music;
-    static ArbolB* arbolb;
-    static AVL* avl;
-    static void order(Lista<Cancion*>*music);
+    static Lista<Cancion *> *Music;
+    static ArbolB *arbolb;
+    static AVL *avl;
+
+    static void order(Lista<Cancion *> *music);
+
     static void erase(string name, string artist, string album);
 
 };

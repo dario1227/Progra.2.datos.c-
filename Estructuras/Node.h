@@ -9,18 +9,19 @@
 #include "../data/User.h"
 
 using namespace std;
+
 class Node {
 public:
-    User* usuario= nullptr;
+    User *usuario = nullptr;
     string data;
-    Node* left= nullptr;
-    Node* right= nullptr;
+    Node *left = nullptr;
+    Node *right = nullptr;
 
-    Node(User* usuario2,string datos){
-        data=datos;
-        usuario=usuario2;
-        left= nullptr;
-        right=nullptr;
+    Node(User *usuario2, string datos) {
+        data = datos;
+        usuario = usuario2;
+        left = nullptr;
+        right = nullptr;
     }
 };
 

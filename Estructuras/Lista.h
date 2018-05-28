@@ -6,62 +6,63 @@
 #define PROGRA_2_DATOS_C_LISTA_H
 //
 #include "Nodo.h"
-template <typename T>
+
+template<typename T>
 class Lista {
 public:
-    Lista(){
-        this->head= nullptr;
-        this->length=0;
-        this->tail= nullptr;
+    Lista() {
+        this->head = nullptr;
+        this->length = 0;
+        this->tail = nullptr;
     };
-    Nodo<T>* head;
+    Nodo<T> *head;
     int length;
-    Nodo<T>* tail;
+    Nodo<T> *tail;
 
-    void add(T valor){
-        Nodo<T>* temp=this->head;
-        Nodo<T>* nodo= new Nodo<T>();
-        nodo->value=valor;
-        if(this->head== nullptr){
-            this->head=nodo;
-            this->tail=nodo;
+    void add(T valor) {
+        Nodo<T> *temp = this->head;
+        Nodo<T> *nodo = new Nodo<T>();
+        nodo->value = valor;
+        if (this->head == nullptr) {
+            this->head = nodo;
+            this->tail = nodo;
             this->length++;
-        }
-        else{
-            while(temp->next!= nullptr){
-                temp=temp->next;
+        } else {
+            while (temp->next != nullptr) {
+                temp = temp->next;
             }
             this->length++;
-            temp->next=nodo;
-            this->tail=nodo;
-            nodo->prev=temp;
+            temp->next = nodo;
+            this->tail = nodo;
+            nodo->prev = temp;
         }
     }
-    T get(int pos){
-        Nodo<T>*temp=this->head;
-        int c=0;
-        while(c!=pos){
-            temp=temp->next;
+
+    T get(int pos) {
+        Nodo<T> *temp = this->head;
+        int c = 0;
+        while (c != pos) {
+            temp = temp->next;
             c++;
         }
         return temp->value;
     }
-    void erase(T valor){
-        Nodo<T>* temp=this->head;
-        if(temp->value==valor){
-            this->head=temp->next;
-            this->head->prev= nullptr;
+
+    void erase(T valor) {
+        Nodo<T> *temp = this->head;
+        if (temp->value == valor) {
+            this->head = temp->next;
+            this->head->prev = nullptr;
             this->length--;
-        }
-        else {
+        } else {
             while (temp->next != nullptr) {
-                if(temp->next->value==valor){
-                    temp->next=temp->next->next;
-                    temp->next->next->prev=temp;
+                if (temp->next->value == valor) {
+                    temp->next = temp->next->next;
+                    temp->next->next->prev = temp;
                     this->length--;
                     break;
                 }
-                temp=temp->next;
+                temp = temp->next;
             }
         }
 
