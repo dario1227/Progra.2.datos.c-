@@ -116,7 +116,8 @@ void OdysseyServer::receiveFile() {
         }
         if (isXML((char *) to_return.str().c_str())) {
             XML_handler::primary_handler((char *) to_return.str().c_str());
-            return receiveFile();
+            to_return.str("");
+// receiveFile();
         }
     }
     //std::cout<<*to_return<<std::endl;

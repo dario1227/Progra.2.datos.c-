@@ -45,6 +45,8 @@ void XML_handler::parse_song_requests(char *archive) {
         std::stringstream ss;
         ss << (*documento);
         std::string result_xml = ss.str();
+        documento->clear();
+
         char *variable = (char *) result_xml.c_str();
         Holder::odisea->send2(result_xml.c_str());
 
@@ -61,6 +63,7 @@ void XML_handler::parse_song_requests(char *archive) {
         ss << (*documento);
         std::string result_xml = ss.str();
         char *variable = (char *) result_xml.c_str();
+        documento->clear();
         Holder::odisea->send2(result_xml.c_str());
     }
     if (metodo2.contains("Nombre")) {
@@ -73,6 +76,8 @@ void XML_handler::parse_song_requests(char *archive) {
         std::stringstream ss;
         ss << (*documento);
         std::string result_xml = ss.str();
+        documento->clear();
+
         // char* variable =(char*) result_xml.c_str();
         Holder::odisea->send2(result_xml.c_str());
 
@@ -115,6 +120,8 @@ void XML_handler::parse_song_requests(char *archive) {
         std::stringstream ss;
         ss << (*documento);
         std::string result_xml = ss.str();
+        documento->clear();
+
         char *variable = (char *) result_xml.c_str();
         Holder::odisea->send2(result_xml);
 
@@ -129,6 +136,22 @@ void XML_handler::parse_song_requests(char *archive) {
         std::string result_xml = ss.str();
         char *variable = (char *) result_xml.c_str();
         Holder::odisea->send2(result_xml.c_str());
+    }if(metodo2.contains("Random")){
+        Lista<Cancion *> *cosa =new Lista<Cancion*>();
+        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
+        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
+        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
+//        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
+//        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
+        xml_document<> *documento = XML_generator::create_Music_list(cosa, x);
+        std::stringstream ss;
+        ss << (*documento);
+        std::string result_xml = ss.str();
+        char *variable = (char *) result_xml.c_str();
+        documento->clear();
+
+        Holder::odisea->send2(result_xml.c_str());
+
     }
 
 }
@@ -255,8 +278,8 @@ void XML_handler::primary_handler(char *archivo) {
         return;
     }
     if (operacion == "Songs") {
-        parse_song_requests((char *) to_return.str().c_str());
-        return;
+        return parse_song_requests((char *) to_return.str().c_str());
+
     }
     if (operacion == "Stream") {
         parse_chunk((char *) to_return.str().c_str());
