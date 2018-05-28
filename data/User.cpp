@@ -6,7 +6,7 @@
 #include "User.h"
 #include "Data_Holder.h"
 
-static int counter = 0;
+int  User::counter = 0;
 HashMap *User::UserHash=new HashMap();
 Lista<User*>*User::Users=new Lista<User*>();
 void User::addFriend(json_object *compa) {
@@ -65,10 +65,10 @@ this->password=password;
 this->name=name;
 this->ID=ID;
 this->age=age;
-    this->num = counter;
+    this->num = User::counter;
     UserHash->Insert(counter, this);
     User::Users->add(this);
-    counter++;
+    User::counter++;
     Data_Holder::users->insertar(name,this);
 
 
@@ -79,8 +79,8 @@ User::User(){
     this->name= "";
     this->password= "";
     this->compas=json_object_new_array();
-    this->num = counter;
+    this->num = User::counter;
     UserHash->Insert(counter, this);
     User::Users->add(this);
-    counter++;
+    User::counter++;
 }

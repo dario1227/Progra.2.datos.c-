@@ -22,7 +22,7 @@ public:
     User();
 
     void addFriend(json_object *compa);
-
+    static int counter;
     static HashMap *UserHash;
     string ID;
     string password;

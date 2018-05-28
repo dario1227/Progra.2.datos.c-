@@ -25,7 +25,18 @@ void HashMap::Insert(int key, User *value) {
         delete table[hash];
     table[hash] = new HashEntry(key, value);
 }
-
+User* HashMap::Search(string nombre) {
+    User* result= nullptr;
+    int y=0;
+    while(y!=User::counter){
+        if(HashMap::Search(y)->name==nombre){
+            result=HashMap::Search(y);
+            return result;
+        }
+        y++;
+    }
+    return result;
+}
 User *HashMap::Search(int key) {
     int hash = HashFunc(key);
     while (table[hash] != NULL && table[hash]->key != key) {

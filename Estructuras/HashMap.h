@@ -22,7 +22,7 @@ public:
     int HashFunc(int key);
 
     void Insert(int key, User *value);
-
+    User* Search(string nombre);
     User *Search(int key);
 };
 
