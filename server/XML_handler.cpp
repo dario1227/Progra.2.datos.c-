@@ -167,10 +167,10 @@ void XML_handler::parse_xml_request_log(char *archive) {
     xml_node<> *user = root_node->first_node("User");
     string name = user->first_attribute("Name")->value();
     char *password = user->first_attribute("Password")->value();
-    User *usuario = Data_Holder::users->search(name);
+    User *usuario = User::UserHash->Search1(name);
     std::cout << name << std::endl;
     if (usuario == nullptr) {
-        root_node->append_attribute(doc.allocate_attribute("Result", "true"));
+        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
         std::stringstream ss;
         ss << doc;
         std::string result_xml = ss.str();
@@ -190,7 +190,7 @@ void XML_handler::parse_xml_request_log(char *archive) {
         return;
     } else {
         std::cout << "WHY IM HERE NO PASSWORD" << std::endl;
-        root_node->append_attribute(doc.allocate_attribute("Result", "true"));
+        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
         std::stringstream ss;
         ss << doc;
         std::string result_xml = ss.str();
