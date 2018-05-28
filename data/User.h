@@ -21,6 +21,7 @@ public:
     static HashMap* UserHash;
     string ID;
     string password;
+    bool contains(User* amigo);
     int num;
     string name;
     string age;

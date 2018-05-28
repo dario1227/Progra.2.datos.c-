@@ -12,6 +12,20 @@ Lista<User*>*User::Users=new Lista<User*>();
 void User::addFriend(json_object *compa) {
     json_object_array_add(this->compas,compa);
 }
+bool User::contains(User *amigo) {
+    Lista<frien*>*lista=this->getFriends();
+    Nodo<frien*>*temp= lista->head;
+    bool result=false;
+    while(temp!= nullptr){
+        if(amigo->ID==temp->value->ID){
+            result= true;
+            return result;
+        }
+        temp=temp->next;
+    }
+    return  result;
+
+}
 string chop2(string data){
     string name=data;
     name.resize(name.length()-1);
