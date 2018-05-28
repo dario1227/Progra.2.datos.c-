@@ -44,7 +44,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    JsonFactory::read();
+    //JsonFactory::read();
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
@@ -75,6 +75,7 @@ int main(int argc, char **argv) {
     User* user3= new User("Roger","18","Rogerbb","h12345");
     user1->addFriend(user2);
     user2->addFriend(user1);
+    cout<<user1->getFriends()->head->value->ID;
     JsonFactory::save();
 //    cout<<json_object_to_json_string(JsonFactory::makeUser(user1));
 //    Quicksort::start(Cancion::Music);
@@ -93,8 +94,8 @@ int main(int argc, char **argv) {
    // Cancion::erase("dario","dios","album");
   //  print(Cancion::Music);
    // cout<<BinarySearch::search("Vicarious", "Tool")->album;
-   Holder::odisea = new OdysseyServer();
-    Holder::odisea->start();
+   //Holder::odisea = new OdysseyServer();
+    //Holder::odisea->start();
     //cout<<user1->getFriends()->head->next->value->ID;
 //    cout<<Cancion::Music->head->next->value->nombre;
 //    cout<<User::Users->head->next->next->value->password;

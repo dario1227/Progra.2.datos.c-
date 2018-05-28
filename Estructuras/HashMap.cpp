@@ -3,7 +3,6 @@
 //
 
 #include "HashMap.h"
-HashEntry** HashMap::table;
 HashMap::HashMap() {
     table = new HashEntry *[TABLE_SIZE];
     for (int i = 0; i < TABLE_SIZE; i++) {

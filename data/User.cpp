@@ -11,7 +11,7 @@ int  User::counter = 0;
 HashMap *User::UserHash=new HashMap();
 Lista<User*>*User::Users=new Lista<User*>();
 void User::addFriend(User *compa) {
-    this->compas.append(compa->ID+"#");
+    this->compas.append(compa->name+"#");
 }
 //verifica un amigo en la lista
 bool User::contains(User *amigo) {
@@ -44,10 +44,12 @@ Lista<User*>* User::getFriends() {
     string frien;
     while(y!=this->compas.length()){
         if(this->compas[y]!='#'){
-            frien.append(to_string(this->compas[y]));
+            char sa=this->compas[y];
+            frien+=sa;
         }
         else{
-            result->add(HashMap::Search1(frien));
+            cout<<User::UserHash->Search1(frien);
+            result->add(User::UserHash->Search1(frien));
             frien.clear();
 
         }
