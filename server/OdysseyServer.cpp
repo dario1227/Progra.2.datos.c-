@@ -10,6 +10,7 @@
 #include "Server.h"
 #include "Archive_manager.h"
 #include "XML_handler.h"
+#include "../data/JsonFactory.h"
 
 #include <json-c/json_tokener.h>
 #include <bits/signum.h>
@@ -111,7 +112,9 @@ void OdysseyServer::receiveFile() {
         std::cout << x << std::endl;
         // std::cout<<*to_return<<std::endl;
         if (QString(to_return.str().c_str()) == "Salir") {
+            JsonFactory::save();
             close(mysock);
+
             return;
         }
         if (isXML((char *) to_return.str().c_str())) {

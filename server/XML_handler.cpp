@@ -19,6 +19,7 @@
 #include "../Estructuras/RadixSort.h"
 #include "../Estructuras/BubbleSort.h"
 #include "../Estructuras/Quicksort.h"
+#include "../data/JsonFactory.h"
 
 /**
  * Metodo para parsear metodo de canciones
@@ -391,6 +392,41 @@ void XML_handler::parse_new_file(char *archivo) {
     }
 }
 
-void XML_handler::parse_new_Friend(char *string) {
-
+void XML_handler::parse_new_Friend(char *archive) {
+    xml_document<> doc;
+    doc.parse<0>(archive);
+    xml_node<> *root_node = doc.first_node("Root");
+    char* enviador = root_node->first_attribute("Enviador")->value();
+    char* destinatario = root_node->first_attribute("Destinatario")->value();
+    User* usuario = User::UserHash->Search1(destinatario);
+    User* enviado = User::UserHash->Search1(enviador);
+    if(usuario == nullptr){
+        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
+        std::stringstream ss;
+        ss << doc;
+        std::string result_xml = ss.str();
+        std::cout << result_xml << std::endl;
+        Holder::odisea->send2(result_xml);
+        return;
+    }
+    else if(usuario->contains(enviado)){
+        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
+        std::stringstream ss;
+        ss << doc;
+        std::string result_xml = ss.str();
+        std::cout << result_xml << std::endl;
+        Holder::odisea->send2(result_xml);
+        return;
+    }
+    else{
+        usuario->addFriend(JsonFactory::makeUser(enviado));
+        enviado->addFriend(JsonFactory::makeUser(usuario));
+        root_node->append_attribute(doc.allocate_attribute("Result", "true"));
+        std::stringstream ss;
+        ss << doc;
+        std::string result_xml = ss.str();
+        std::cout << result_xml << std::endl;
+        Holder::odisea->send2(result_xml);
+        return;
+    }
 }
