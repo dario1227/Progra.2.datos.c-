@@ -2,6 +2,7 @@
 // Created by kenneth on 4/27/18.
 //
 
+#include <QtCore/QString>
 #include "Binary_search_tree.h"
 
 User *Binary_search_tree::search(string name) {
@@ -9,7 +10,7 @@ User *Binary_search_tree::search(string name) {
     while (actual != nullptr) {
         std::cout << "___________________________________________________________________" << std::endl;
         std::cout << actual->data << std::endl;
-        if (actual->data == name) {
+        if (QString(actual->data.c_str()).contains(name.c_str())) {
             return actual->usuario;
         } else if (actual->data > name) {
             actual = actual->right;

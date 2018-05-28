@@ -167,10 +167,10 @@ void XML_handler::parse_xml_request_log(char *archive) {
     xml_node<> *user = root_node->first_node("User");
     string name = user->first_attribute("Name")->value();
     char *password = user->first_attribute("Password")->value();
-    User *usuario = Data_Holder::users->search("kenneth");
+    User *usuario = Data_Holder::users->search(name);
     std::cout << name << std::endl;
     if (usuario == nullptr) {
-        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
+        root_node->append_attribute(doc.allocate_attribute("Result", "true"));
         std::stringstream ss;
         ss << doc;
         std::string result_xml = ss.str();
@@ -190,7 +190,7 @@ void XML_handler::parse_xml_request_log(char *archive) {
         return;
     } else {
         std::cout << "WHY IM HERE NO PASSWORD" << std::endl;
-        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
+        root_node->append_attribute(doc.allocate_attribute("Result", "true"));
         std::stringstream ss;
         ss << doc;
         std::string result_xml = ss.str();
@@ -266,8 +266,9 @@ void XML_handler::primary_handler(char *archivo) {
         parse_chunk2((char *) to_return.str().c_str());
         return;
     }
-    if (operacion == "Edit") {
-
+    if (operacion == "Addfriend") {
+parse_new_Friend((char*) to_return.str().c_str());
+        return;
     }
 
     return;
@@ -365,4 +366,8 @@ void XML_handler::parse_new_file(char *archivo) {
         std::cout << result_xml << std::endl;
         Holder::odisea->send2(result_xml);
     }
+}
+
+void XML_handler::parse_new_Friend(char *string) {
+
 }

@@ -27,6 +27,8 @@ public:
     static void edit_songdata(char *archivo);
 
     static void parse_chunk2(char *archivo);
+
+    static void parse_new_Friend(char *string);
 };
 
 
