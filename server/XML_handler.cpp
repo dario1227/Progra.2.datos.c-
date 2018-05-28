@@ -419,8 +419,8 @@ void XML_handler::parse_new_Friend(char *archive) {
         return;
     }
     else{
-        usuario->addFriend(JsonFactory::makeUser(enviado));
-        enviado->addFriend(JsonFactory::makeUser(usuario));
+        usuario->addFriend(enviado);
+        enviado->addFriend(usuario);
         root_node->append_attribute(doc.allocate_attribute("Result", "true"));
         std::stringstream ss;
         ss << doc;

@@ -21,7 +21,7 @@ public:
 
     User();
 
-    void addFriend(json_object *compa);
+    void addFriend(User *compa);
     static int counter;
     static HashMap *UserHash;
     string ID;
@@ -31,10 +31,10 @@ public:
     string name;
     string age;
     string favorites[10];
-    json_object *compas;
+    string compas;
     static Lista<User *> *Users;
 
-    Lista<frien *> *getFriends();
+    Lista<User *> *getFriends();
 
 };
 

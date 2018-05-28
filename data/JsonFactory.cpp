@@ -71,6 +71,7 @@ void saveaux(string data) {
     ofstream myfile;
     string da = name + "/Jsons" + "/" + data + ".json";
     myfile.open(da.c_str());
+    myfile.clear();
     json_object *array = json_object_new_array();
     if (data == "Canciones") {
         Nodo<Cancion *> *temp = Cancion::Music->head;
@@ -82,10 +83,8 @@ void saveaux(string data) {
 
     } else {
         Nodo<User *> *temp = User::Users->head;
-        temp = User::Users->head;
         while (temp != nullptr) {
             json_object_array_add(array, JsonFactory::makeUser(temp->value));
-
             temp = temp->next;
         }
         json_object_to_file_ext((char *) da.c_str(), array, 0777);
@@ -137,6 +136,7 @@ json_object *JsonFactory::makeUser(User *usuario) {
     json_object_object_add(objeto, "age", toAdd);
     toAdd = json_object_new_string(usuario->favorites->c_str());
     json_object_object_add(objeto, "favorites", toAdd);
-    json_object_object_add(objeto, "Friends", usuario->compas);
+    toAdd = json_object_new_string(usuario->compas.c_str());
+    json_object_object_add(objeto, "Friends", toAdd);
     return objeto;
 }

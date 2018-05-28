@@ -15,14 +15,13 @@ class User;
 using namespace std;
 
 class HashMap {
-private:
-    HashEntry **table;
 public:
     HashMap();
-    int HashFunc(int key);
-    void Insert(int key, User *value);
-    User* Search1(string nombre);
-    User* Search(int key);
+   static  HashEntry **table;
+    static  int HashFunc(int key);
+    static void Insert(int key, User *value);
+    static User* Search1(string nombre);
+    static User* Search(int key);
 };
 
 
