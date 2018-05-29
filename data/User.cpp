@@ -13,13 +13,35 @@ Lista<User*>*User::Users=new Lista<User*>();
 void User::addFriend(User *compa) {
     this->compas.append(compa->name+"#");
 }
+void User::addRecomendado(string name) {
+    this->recomendados.append(name+"#");
+}
+Lista<string>* User::getRecomendados() {
+    Lista<string>* result=new Lista<string>();
+    int y=0;
+    string frien;
+    while(y!=this->recomendados.length()){
+        if(this->recomendados[y]!='#'){
+            char sa=this->recomendados[y];
+            frien+=sa;
+        }
+        else{
+            result->add(frien);
+            frien.clear();
+
+        }
+        y++;
+    }
+    return result;
+
+}
 //verifica un amigo en la lista
 bool User::contains(User *amigo) {
     Lista<User*>*lista=this->getFriends();
     Nodo<User*>*temp= lista->head;
     bool result=false;
     while(temp!= nullptr){
-        if(amigo->ID==temp->value->ID){
+        if(amigo->name==temp->value->name){
             result= true;
             return result;
         }
@@ -48,7 +70,6 @@ Lista<User*>* User::getFriends() {
             frien+=sa;
         }
         else{
-            cout<<User::UserHash->Search1(frien);
             result->add(User::UserHash->Search1(frien));
             frien.clear();
 
