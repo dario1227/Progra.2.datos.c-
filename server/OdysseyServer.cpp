@@ -112,7 +112,7 @@ void OdysseyServer::receiveFile() {
         std::cout << x << std::endl;
         // std::cout<<*to_return<<std::endl;
         if (QString(to_return.str().c_str()) == "Salir") {
-            JsonFactory::save();
+          //  JsonFactory::save();
             close(mysock);
 
             return;
