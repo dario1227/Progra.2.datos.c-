@@ -354,7 +354,7 @@ void XML_handler::parse_new_file(char *archivo) {
         char *letra = root_node->first_attribute("Letra")->value();
         char *artista = root_node->first_attribute("Artista")->value();
         char *Album = root_node->first_attribute("Album")->value();
-
+        char* generp = root_node->first_attribute("Genero")->value();
         string str = base64::base64_decode(archive);
         FILE *oFile;
         //std::cout << str << std::endl;
@@ -366,7 +366,7 @@ void XML_handler::parse_new_file(char *archivo) {
         ss << doc;
         std::string result_xml = ss.str();
         std::cout << result_xml << std::endl;
-        Factory::Cancion2(filename, Album, artista, letra, "");
+        Factory::Cancion2(filename, Album, artista, letra, generp);
         Holder::odisea->send2(result_xml);
 
     } catch (exception) {
@@ -421,6 +421,7 @@ void XML_handler::parse_new_Friend(char *archive) {
     else{
         usuario->addFriend(enviado);
         enviado->addFriend(usuario);
+        JsonFactory::save();
         root_node->append_attribute(doc.allocate_attribute("Result", "true"));
         std::stringstream ss;
         ss << doc;
