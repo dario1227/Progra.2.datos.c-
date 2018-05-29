@@ -17,7 +17,10 @@ public:
     void start();
 
     bool isXML(char *files);
-
+/**
+ * Envia un archivo xml
+ * @param to_send
+ */
     void send2(string to_send);
 
     void receiveFile();
