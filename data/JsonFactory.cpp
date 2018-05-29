@@ -40,10 +40,12 @@ void readaux(string data) {
     } else {
         while (y != z) {
             json_object *temp = json_object_array_get_idx(datos, y);
-            new User(chop(json_object_to_json_string(json_object_object_get(temp, "name"))),
+           User* user= new User(chop(json_object_to_json_string(json_object_object_get(temp, "name"))),
                      chop(json_object_to_json_string(json_object_object_get(temp, "age"))),
                      chop(json_object_to_json_string(json_object_object_get(temp, "ID"))),
                      chop(json_object_to_json_string(json_object_object_get(temp, "password"))));
+           user->compas=chop(json_object_to_json_string(json_object_object_get(temp, "Friends")));
+           user->recomendados=chop(json_object_to_json_string(json_object_object_get(temp, "Recomended")));
             y++;
 
         }
@@ -138,5 +140,7 @@ json_object *JsonFactory::makeUser(User *usuario) {
     json_object_object_add(objeto, "favorites", toAdd);
     toAdd = json_object_new_string(usuario->compas.c_str());
     json_object_object_add(objeto, "Friends", toAdd);
+    toAdd = json_object_new_string(usuario->recomendados.c_str());
+    json_object_object_add(objeto, "Recomended", toAdd);
     return objeto;
 }

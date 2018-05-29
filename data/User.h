@@ -18,9 +18,7 @@ class HashMap;
 class User {
 public:
     User(string name, string age, string ID, string password);
-
     User();
-
     void addFriend(User *compa);
     static int counter;
     static HashMap *UserHash;
@@ -32,6 +30,9 @@ public:
     string age;
     string favorites[10];
     string compas;
+    string recomendados;
+    void addRecomendado(string name);
+    Lista<string>* getRecomendados();
     static Lista<User *> *Users;
 
     Lista<User *> *getFriends();

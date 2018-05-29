@@ -44,7 +44,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
-    //JsonFactory::read();
+    JsonFactory::read();
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
@@ -68,14 +68,16 @@ int main(int argc, char **argv) {
 //    new Cancion("Hangar18","Rest in peace","Megadeth","dale");
 //    new Cancion("Futile","Fear","Porcupine","dale duro que ella quiere amor");
 ////    new Cancion("Schism","Lateralus","Tool","dale duro que ella quiere");
-   User* user1= new User("Kenneth","19","kennet117s","kennet117s");
+  // User* user1= new User("Kenneth","19","kennet117s","kennet117s");
 //    //std::cout<<User::Users->get(0)->name<<std::endl;
-    User* user2= new User("kenneth","18","kennethpapi","darksouls");
+    //User* user2= new User("kenneth","18","kennethpapi","darksouls");
 //  //  std::cout<<user2->name<<std::endl;
-    User* user3= new User("Roger","18","Rogerbb","h12345");
-    user1->addFriend(user2);
-    user2->addFriend(user1);
-    cout<<user1->getFriends()->head->value->ID;
+    //User* user3= new User("Roger","18","Rogerbb","h12345");
+    //user1->addFriend(user2);
+   // user2->addFriend(user1);
+    //user1->addRecomendado("schism");
+    //user1->addRecomendado("tool");
+//cout<<User::Users->head->value->getRecomendados()->head->value;
     JsonFactory::save();
 //    cout<<json_object_to_json_string(JsonFactory::makeUser(user1));
 //    Quicksort::start(Cancion::Music);
