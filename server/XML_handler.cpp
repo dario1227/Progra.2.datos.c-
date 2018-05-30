@@ -185,6 +185,7 @@ void XML_handler::edit_songdata(char *archivo) {
     xml_node<> *root_node = doc.first_node("Root");
     char *songname = root_node->first_attribute("Name")->value();
     char *person = root_node->first_attribute("Artist")->value();
+    char* album = root_node->first_attribute("Album")->value();
     xml_node<> *editado = root_node->first_node("Edit");
     Cancion *cancion = BinarySearch::search(songname, person);
     if (cancion == nullptr) {
@@ -198,7 +199,7 @@ void XML_handler::edit_songdata(char *archivo) {
         cancion->nombre = editado->first_attribute("Name")->value();
         cancion->album = editado->first_attribute("Album")->value();
         cancion->letra = new QString(editado->first_attribute("Letra")->value());
-        root_node->append_attribute(doc.allocate_attribute("Result", "false"));
+        root_node->append_attribute(doc.allocate_attribute("Result", "true"));
         std::stringstream ss;
         ss << (doc);
         std::string result_xml = ss.str();

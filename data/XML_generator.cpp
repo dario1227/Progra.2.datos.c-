@@ -114,6 +114,7 @@ void XML_generator::create_music_helper(xml_document<> *doc, xml_node<> *root, C
     child->append_attribute(doc->allocate_attribute("Genero",genero));
     child->append_attribute(doc->allocate_attribute("Letra", letra));
     child->append_attribute(doc->allocate_attribute("Nombre", nombre));
+    cout<<"DIOS JUEPUTA"<<album<<std::endl;
     child->append_attribute(doc->allocate_attribute("Album", album));
     child->append_attribute(doc->allocate_attribute("Calificacion", calificacion));
     child->append_attribute(doc->allocate_attribute("Artista", artista));

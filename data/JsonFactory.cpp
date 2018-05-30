@@ -115,9 +115,9 @@ json_object *JsonFactory::makeSong(Cancion *song) {
     json_object_object_add(objeto, "name", toAdd);
     toAdd = json_object_new_string(song->artista.c_str());
     json_object_object_add(objeto, "artist", toAdd);
-    toAdd = json_object_new_string(song->album.c_str());
-    json_object_object_add(objeto, "genero", toAdd);
     toAdd = json_object_new_string(song->genero.c_str());
+    json_object_object_add(objeto, "genero", toAdd);
+    toAdd = json_object_new_string(song->album.c_str());
     json_object_object_add(objeto, "album", toAdd);
     toAdd = json_object_new_string(song->letra->toStdString().c_str());
     json_object_object_add(objeto, "lyrics", toAdd);

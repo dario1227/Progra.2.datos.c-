@@ -44,6 +44,7 @@ void print(Lista<Cancion*>*lista){
     }
 }
 int main(int argc, char **argv) {
+   // JsonFactory::save();
     JsonFactory::read();
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
 //    Factory::Cancion2("MEME","MEME","MEME","MEME cosa cosa caca caca");
