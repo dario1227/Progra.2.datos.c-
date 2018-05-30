@@ -11,17 +11,17 @@ int  User::counter = 0;
 HashMap *User::UserHash=new HashMap();
 Lista<User*>*User::Users=new Lista<User*>();
 void User::addFriend(User *compa) {
-    this->compas.append(compa->name+"#");
+    this->compas.append(compa->name+"&");
 }
 void User::addRecomendado(string name) {
-    this->recomendados.append(name+"#");
+    this->recomendados.append(name+"&");
 }
 Lista<string>* User::getRecomendados() {
     Lista<string>* result=new Lista<string>();
     int y=0;
     string frien;
     while(y!=this->recomendados.length()){
-        if(this->recomendados[y]!='#'){
+        if(this->recomendados[y]!='&'){
             char sa=this->recomendados[y];
             frien+=sa;
         }
@@ -65,7 +65,7 @@ Lista<User*>* User::getFriends() {
     int y=0;
     string frien;
     while(y!=this->compas.length()){
-        if(this->compas[y]!='#'){
+        if(this->compas[y]!='&'){
             char sa=this->compas[y];
             frien+=sa;
         }
