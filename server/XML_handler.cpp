@@ -40,13 +40,14 @@ void XML_handler::parse_song_requests(char *archive) {
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion *> *lista = Cancion::avl->Buscar(busqueda);
         if (orden.contains("true")) {
-            if(sorted.contains("Autor")){
-            RadixSort::start(lista);}
-            if(sorted.contains("Nombre")){
-                std::cout<<"SI ENTRO PERRO"<<std::endl;
+            if (sorted.contains("Autor")) {
+                RadixSort::start(lista);
+            }
+            if (sorted.contains("Nombre")) {
+                std::cout << "SI ENTRO PERRO" << std::endl;
                 Quicksort::start(lista);
             }
-            if(sorted.contains("Album")){
+            if (sorted.contains("Album")) {
                 BubbleSort::start(lista);
             }
         }
@@ -65,12 +66,13 @@ void XML_handler::parse_song_requests(char *archive) {
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion *> *lista = BinarySearch::start(busqueda);
         if (orden.contains("true")) {
-            if(sorted.contains("Autor")){
-                RadixSort::start(lista);}
-            if(sorted.contains("Nombre")){
+            if (sorted.contains("Autor")) {
+                RadixSort::start(lista);
+            }
+            if (sorted.contains("Nombre")) {
                 Quicksort::start(lista);
             }
-            if(sorted.contains("Album")){
+            if (sorted.contains("Album")) {
                 BubbleSort::start(lista);
             }
         }
@@ -86,12 +88,13 @@ void XML_handler::parse_song_requests(char *archive) {
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion *> *lista = Cancion::arbolb->Buscar_Nodo(busqueda);
         if (orden.contains("true")) {
-            if(sorted.contains("Autor")){
-                RadixSort::start(lista);}
-            if(sorted.contains("Nombre")){
+            if (sorted.contains("Autor")) {
+                RadixSort::start(lista);
+            }
+            if (sorted.contains("Nombre")) {
                 Quicksort::start(lista);
             }
-            if(sorted.contains("Album")){
+            if (sorted.contains("Album")) {
                 BubbleSort::start(lista);
             }
         }
@@ -159,11 +162,12 @@ void XML_handler::parse_song_requests(char *archive) {
         std::string result_xml = ss.str();
         char *variable = (char *) result_xml.c_str();
         Holder::odisea->send2(result_xml.c_str());
-    }if(metodo2.contains("Random")){
-        Lista<Cancion *> *cosa =new Lista<Cancion*>();
-        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
-        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
-        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
+    }
+    if (metodo2.contains("Random")) {
+        Lista<Cancion *> *cosa = new Lista<Cancion *>();
+        cosa->add(Cancion::Music->get(rand() % Cancion::Music->length));
+        cosa->add(Cancion::Music->get(rand() % Cancion::Music->length));
+        cosa->add(Cancion::Music->get(rand() % Cancion::Music->length));
 //        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
 //        cosa->add(Cancion::Music->get(rand()%Cancion::Music->length));
         xml_document<> *documento = XML_generator::create_Music_list(cosa, x);
@@ -314,17 +318,17 @@ void XML_handler::primary_handler(char *archivo) {
         return;
     }
     if (operacion == "Addfriend") {
-parse_new_Friend((char*) to_return.str().c_str());
+        parse_new_Friend((char *) to_return.str().c_str());
         return;
     }
-    if(operacion=="FriendList"){
-       User* usuario =  User::UserHash->Search1(root_node->first_attribute("Enviador")->value());
-        root_node->append_attribute(doc.allocate_attribute("Friends",doc.allocate_string(usuario->compas.c_str())));
+    if (operacion == "FriendList") {
+        User *usuario = User::UserHash->Search1(root_node->first_attribute("Enviador")->value());
+        root_node->append_attribute(doc.allocate_attribute("Friends", doc.allocate_string(usuario->compas.c_str())));
         std::stringstream ss;
         ss << doc;
         std::string result_xml = ss.str();
-        std::cout<<"ESTE ES EL ENVIADO DE SATAN"<<std::endl;
-         std::cout<<result_xml<<std::endl;
+        std::cout << "ESTE ES EL ENVIADO DE SATAN" << std::endl;
+        std::cout << result_xml << std::endl;
         Holder::odisea->send2(result_xml);
     }
 
@@ -387,7 +391,7 @@ void XML_handler::parse_new_file(char *archivo) {
         char *letra = root_node->first_attribute("Letra")->value();
         char *artista = root_node->first_attribute("Artista")->value();
         char *Album = root_node->first_attribute("Album")->value();
-        char* generp = root_node->first_attribute("Genero")->value();
+        char *generp = root_node->first_attribute("Genero")->value();
         string str = base64::base64_decode(archive);
         FILE *oFile;
         //std::cout << str << std::endl;
@@ -429,11 +433,11 @@ void XML_handler::parse_new_Friend(char *archive) {
     xml_document<> doc;
     doc.parse<0>(archive);
     xml_node<> *root_node = doc.first_node("Root");
-    char* enviador = root_node->first_attribute("Enviador")->value();
-    char* destinatario = root_node->first_attribute("Destinatario")->value();
-    User* usuario = User::UserHash->Search1(destinatario);
-    User* enviado = User::UserHash->Search1(enviador);
-    if(usuario == nullptr){
+    char *enviador = root_node->first_attribute("Enviador")->value();
+    char *destinatario = root_node->first_attribute("Destinatario")->value();
+    User *usuario = User::UserHash->Search1(destinatario);
+    User *enviado = User::UserHash->Search1(enviador);
+    if (usuario == nullptr) {
         root_node->append_attribute(doc.allocate_attribute("Result", "false"));
         std::stringstream ss;
         ss << doc;
@@ -441,8 +445,7 @@ void XML_handler::parse_new_Friend(char *archive) {
         std::cout << result_xml << std::endl;
         Holder::odisea->send2(result_xml);
         return;
-    }
-    else if(usuario->contains(enviado)){
+    } else if (usuario->contains(enviado)) {
         root_node->append_attribute(doc.allocate_attribute("Result", "false"));
         std::stringstream ss;
         ss << doc;
@@ -450,8 +453,7 @@ void XML_handler::parse_new_Friend(char *archive) {
         std::cout << result_xml << std::endl;
         Holder::odisea->send2(result_xml);
         return;
-    }
-    else{
+    } else {
         usuario->addFriend(enviado);
         enviado->addFriend(usuario);
         JsonFactory::save();

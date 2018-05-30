@@ -47,6 +47,7 @@ public:
         }
         return temp->value;
     }
+
     void erase(T valor) {
         Nodo<T> *temp = this->head;
         if (temp->value == valor) {

@@ -110,8 +110,8 @@ void XML_generator::create_music_helper(xml_document<> *doc, xml_node<> *root, C
     char *nombre = doc->allocate_string(cancion->nombre.c_str());
     char *album = doc->allocate_string(cancion->album.c_str());
     char *artista = doc->allocate_string(cancion->artista.c_str());
-    char* genero = doc->allocate_string(cancion->genero.c_str());
-    child->append_attribute(doc->allocate_attribute("Genero",genero));
+    char *genero = doc->allocate_string(cancion->genero.c_str());
+    child->append_attribute(doc->allocate_attribute("Genero", genero));
     child->append_attribute(doc->allocate_attribute("Letra", letra));
     child->append_attribute(doc->allocate_attribute("Nombre", nombre));
     cout<<"DIOS JUEPUTA"<<album<<std::endl;

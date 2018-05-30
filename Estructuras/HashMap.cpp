@@ -3,6 +3,7 @@
 //
 
 #include "HashMap.h"
+
 HashMap::HashMap() {
     table = new HashEntry *[TABLE_SIZE];
     for (int i = 0; i < TABLE_SIZE; i++) {
@@ -24,18 +25,20 @@ void HashMap::Insert(int key, User *value) {
         delete table[hash];
     table[hash] = new HashEntry(key, value);
 }
-User* HashMap::Search1(string nombre) {
-    User* result= nullptr;
-    int y=0;
-    while(y!=User::counter){
-        if(HashMap::Search(y)->name==nombre){
-            result=HashMap::Search(y);
+
+User *HashMap::Search1(string nombre) {
+    User *result = nullptr;
+    int y = 0;
+    while (y != User::counter) {
+        if (HashMap::Search(y)->name == nombre) {
+            result = HashMap::Search(y);
             return result;
         }
         y++;
     }
     return result;
 }
+
 User *HashMap::Search(int key) {
     int hash = HashFunc(key);
     while (table[hash] != NULL && table[hash]->key != key) {
