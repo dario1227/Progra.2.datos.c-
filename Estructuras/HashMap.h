@@ -12,16 +12,22 @@ const int TABLE_SIZE = 128;
 class HashEntry;
 
 class User;
+
 using namespace std;
 
 class HashMap {
 public:
     HashMap();
-     HashEntry **table;
-      int HashFunc(int key);
-     void Insert(int key, User *value);
-     User* Search1(string nombre);
-     User* Search(int key);
+
+    HashEntry **table;
+
+    int HashFunc(int key);
+
+    void Insert(int key, User *value);
+
+    User *Search1(string nombre);
+
+    User *Search(int key);
 };
 
 

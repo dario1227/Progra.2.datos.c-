@@ -13,7 +13,7 @@
 #include "../data/JsonFactory.h"
 
 #include <json-c/json_tokener.h>
-#include <bits/signum.h>
+//#include <bits/signum.h>
 #include <signal.h>
 #include <zconf.h>
 #include <unistd.h>
@@ -112,7 +112,7 @@ void OdysseyServer::receiveFile() {
         std::cout << x << std::endl;
         // std::cout<<*to_return<<std::endl;
         if (QString(to_return.str().c_str()) == "Salir") {
-          //  JsonFactory::save();
+            //  JsonFactory::save();
             close(mysock);
 
             return;

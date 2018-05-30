@@ -26,6 +26,7 @@ static Lista<QString> *separate(QString *frase) {
     words->add(word);
     return words;
 }
+
 //inicia el backtracking
 Cancion *BackTracking::start(Lista<Cancion *> *Music, string frase) {
     Lista<QString> *words = separate(new QString(frase.c_str()));

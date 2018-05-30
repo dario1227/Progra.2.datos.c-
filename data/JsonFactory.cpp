@@ -6,6 +6,7 @@
 #include <zconf.h>
 #include <pwd.h>
 #include "JsonFactory.h"
+
 //quita las comillas que retornan las funciones de jsonc
 string chop(string data) {
     string name = data;
@@ -40,12 +41,12 @@ void readaux(string data) {
     } else {
         while (y != z) {
             json_object *temp = json_object_array_get_idx(datos, y);
-           User* user= new User(chop(json_object_to_json_string(json_object_object_get(temp, "name"))),
-                     chop(json_object_to_json_string(json_object_object_get(temp, "age"))),
-                     chop(json_object_to_json_string(json_object_object_get(temp, "ID"))),
-                     chop(json_object_to_json_string(json_object_object_get(temp, "password"))));
-           user->compas=chop(json_object_to_json_string(json_object_object_get(temp, "Friends")));
-           user->recomendados=chop(json_object_to_json_string(json_object_object_get(temp, "Recomended")));
+            User *user = new User(chop(json_object_to_json_string(json_object_object_get(temp, "name"))),
+                                  chop(json_object_to_json_string(json_object_object_get(temp, "age"))),
+                                  chop(json_object_to_json_string(json_object_object_get(temp, "ID"))),
+                                  chop(json_object_to_json_string(json_object_object_get(temp, "password"))));
+            user->compas = chop(json_object_to_json_string(json_object_object_get(temp, "Friends")));
+            user->recomendados = chop(json_object_to_json_string(json_object_object_get(temp, "Recomended")));
             y++;
 
         }
@@ -53,6 +54,7 @@ void readaux(string data) {
     }
 
 }
+
 // lee los archivos Json y carga al server los datos
 void JsonFactory::read() {
     int x = 0;
@@ -97,6 +99,7 @@ void saveaux(string data) {
     myfile.close();
 
 }
+
 //guarda las canciones en memoria al archivos de Json
 void JsonFactory::save() {
     int x = 0;
@@ -108,6 +111,7 @@ void JsonFactory::save() {
         data = "Usuarios";
     }
 }
+
 //crea un archivo Json para una cancion
 json_object *JsonFactory::makeSong(Cancion *song) {
     json_object *objeto = json_object_new_object();
@@ -125,6 +129,7 @@ json_object *JsonFactory::makeSong(Cancion *song) {
     json_object_object_add(objeto, "stars", toAdd);;
     return objeto;
 }
+
 //crea el Json para un user
 json_object *JsonFactory::makeUser(User *usuario) {
     json_object *objeto = json_object_new_object();

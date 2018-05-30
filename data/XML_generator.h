@@ -15,6 +15,7 @@ using namespace std;
 class XML_generator {
 public:
     static int index;
+
 /**
  * genera una lista de cancionbes
  * @param canciones
@@ -22,6 +23,7 @@ public:
  * @return
  */
     static xml_document<> *create_Music_list(Lista<Cancion *> *canciones, int co);
+
 /**
  * ayuda a crear la lista de musica
  * @param root
