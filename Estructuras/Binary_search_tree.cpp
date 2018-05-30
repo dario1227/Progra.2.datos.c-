@@ -23,7 +23,6 @@ User *Binary_search_tree::search(string name) {
 
 void Binary_search_tree::insertar(string numero, User *usuario) {
     Node *newNode = new Node(usuario, numero);
-    std::cout << "GUARDE EL HIJUAPUTA MIERDA" << std::endl;
 
     if (root == nullptr) {
         root = newNode;

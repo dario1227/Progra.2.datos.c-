@@ -34,13 +34,21 @@ void XML_handler::parse_song_requests(char *archive) {
     char *busqueda = root_node->first_attribute("Busqueda")->value();
     string page = root_node->first_attribute("Page")->value();
     QString orden = root_node->first_attribute("Orden")->value();
-
+    QString sorted = root_node->first_attribute("Sorted")->value();
     int x = stoi(page);
     if (metodo2.contains("Autor")) {
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion *> *lista = Cancion::avl->Buscar(busqueda);
         if (orden.contains("true")) {
-            RadixSort::start(lista);
+            if(sorted.contains("Autor")){
+            RadixSort::start(lista);}
+            if(sorted.contains("Nombre")){
+                std::cout<<"SI ENTRO PERRO"<<std::endl;
+                Quicksort::start(lista);
+            }
+            if(sorted.contains("Album")){
+                BubbleSort::start(lista);
+            }
         }
         xml_document<> *documento = XML_generator::create_Music_list(lista, x);
         std::stringstream ss;
@@ -57,7 +65,14 @@ void XML_handler::parse_song_requests(char *archive) {
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion *> *lista = BinarySearch::start(busqueda);
         if (orden.contains("true")) {
-            BubbleSort::start(lista);
+            if(sorted.contains("Autor")){
+                RadixSort::start(lista);}
+            if(sorted.contains("Nombre")){
+                Quicksort::start(lista);
+            }
+            if(sorted.contains("Album")){
+                BubbleSort::start(lista);
+            }
         }
         xml_document<> *documento = XML_generator::create_Music_list(lista, x);
         std::stringstream ss;
@@ -71,7 +86,14 @@ void XML_handler::parse_song_requests(char *archive) {
         //debe cambiar a metodos de busqueda ahi
         Lista<Cancion *> *lista = Cancion::arbolb->Buscar_Nodo(busqueda);
         if (orden.contains("true")) {
-            Quicksort::start(lista);
+            if(sorted.contains("Autor")){
+                RadixSort::start(lista);}
+            if(sorted.contains("Nombre")){
+                Quicksort::start(lista);
+            }
+            if(sorted.contains("Album")){
+                BubbleSort::start(lista);
+            }
         }
         xml_document<> *documento = XML_generator::create_Music_list(lista, x);
         std::stringstream ss;
