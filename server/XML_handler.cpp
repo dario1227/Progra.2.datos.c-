@@ -316,6 +316,16 @@ void XML_handler::primary_handler(char *archivo) {
 parse_new_Friend((char*) to_return.str().c_str());
         return;
     }
+    if(operacion=="FriendList"){
+       User* usuario =  User::UserHash->Search1(root_node->first_attribute("Enviador")->value());
+        root_node->append_attribute(doc.allocate_attribute("Friends",doc.allocate_string(usuario->compas.c_str())));
+        std::stringstream ss;
+        ss << doc;
+        std::string result_xml = ss.str();
+        std::cout<<"ESTE ES EL ENVIADO DE SATAN"<<std::endl;
+         std::cout<<result_xml<<std::endl;
+        Holder::odisea->send2(result_xml);
+    }
 
     return;
 }
